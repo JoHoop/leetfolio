@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Loading, LoadingError } from './components/Loading';
 import { App } from './App';
+import './index.css';
 
 ReactDOM.render(
   <ErrorBoundary fallback={<LoadingError />}>
