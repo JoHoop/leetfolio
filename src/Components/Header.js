@@ -6,9 +6,10 @@ import {
   Tooltip,
   IconButton,
   Zoom,
+  Link,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { ThemeToggle } from '../Theme/ThemeToggle';
+import { ThemeToggle } from '../theme/ThemeToggle';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +55,22 @@ export const Header = () => {
           React App
         </Typography>
         <nav>
+          <Link
+            variant='button'
+            color='textPrimary'
+            href='/'
+            className={classes.link}
+          >
+            Home
+          </Link>
+          <Link
+            variant='button'
+            color='textPrimary'
+            href='/editor'
+            className={classes.link}
+          >
+            Editor
+          </Link>
           <ThemeToggle />
           <Tooltip
             title={'GitHub repo'}

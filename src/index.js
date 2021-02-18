@@ -1,5 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Loading, LoadingError } from './components/Loading';
 import { App } from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <ErrorBoundary fallback={<LoadingError />}>
+    <Suspense fallback={<Loading />}>
+      <App />
+    </Suspense>
+  </ErrorBoundary>,
+  document.getElementById('root')
+);
