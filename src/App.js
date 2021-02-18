@@ -1,11 +1,13 @@
-function App() {
-  return (
-    <header>
-      <a href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
-        Learn React
-      </a>
-    </header>
-  );
-}
+import React from 'react';
+import { Landing } from './Pages/Landing';
+import { ThemeProvider } from './Theme/ThemeProvider';
+import { CssBaseline } from '@material-ui/core';
 
-export default App;
+export const App = () => {
+  return (
+    <ThemeProvider>
+      <CssBaseline />
+      <Landing />
+    </ThemeProvider>
+  );
+};
