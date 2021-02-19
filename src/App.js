@@ -13,6 +13,9 @@ const Home = lazy(() =>
 const Editor = lazy(() =>
   import('./pages/Editor').then((module) => ({ default: module.Editor }))
 );
+const Resume = lazy(() =>
+  import('./pages/Resume').then((module) => ({ default: module.Resume }))
+);
 const PageNotFound = lazy(() =>
   import('./pages/PageNotFound').then((module) => ({
     default: module.PageNotFound,
@@ -46,6 +49,7 @@ export const App = () => {
                 <Switch>
                   <Route path='/' exact component={Home} />
                   <Route path='/editor' component={Editor} />
+                  <Route path='/resume' component={Resume} />
                   <Route path='*' component={PageNotFound} />
                 </Switch>
               </Suspense>

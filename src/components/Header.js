@@ -71,6 +71,14 @@ export const Header = () => {
           >
             Editor
           </Link>
+          <Link
+            variant='button'
+            color='textPrimary'
+            href='/resume'
+            className={classes.link}
+          >
+            Resume
+          </Link>
           <ThemeToggle />
           <Tooltip
             title={'GitHub repo'}
