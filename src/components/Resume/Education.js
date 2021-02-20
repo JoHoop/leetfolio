@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Education = (props) => {
-  const educationItems = props.education.map((education) => {
+export const Education = ({ education }) => {
+  const items = education.map((education) => {
     const { area, institution, startDate, endDate, studyType } = education;
 
     return (
@@ -21,7 +21,7 @@ export const Education = (props) => {
     <section className={'lists'} id='education'>
       <h2>Education</h2>
       <div className={'wrapper'}>
-        <ul>{educationItems}</ul>
+        <ul>{items}</ul>
       </div>
     </section>
   );

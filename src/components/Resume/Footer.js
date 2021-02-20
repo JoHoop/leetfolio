@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Footer = (props) => {
-  const { name } = props.basics;
+export const Footer = ({ basics }) => {
+  const { name } = basics;
 
   return (
     <footer>

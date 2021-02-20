@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Card = (props) => {
-  const { name, label, location } = props.basics;
+export const Card = ({ basics }) => {
+  const { name, label, location } = basics;
 
   return (
     <div id='bio'>

@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Experience = (props) => {
-  const experienceItems = props.work.map((experience) => {
+export const Experience = ({ work }) => {
+  const items = work.map((experience) => {
     const {
       company,
       website,
@@ -32,7 +32,7 @@ export const Experience = (props) => {
     <section className={'lists'} id='experience'>
       <h2>Experience</h2>
       <div className={'wrapper'}>
-        <ul>{experienceItems}</ul>
+        <ul>{items}</ul>
       </div>
     </section>
   );

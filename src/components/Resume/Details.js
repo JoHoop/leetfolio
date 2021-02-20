@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Details = (props) => {
-  const { birthday, location, phone, email } = props.basics;
+export const Details = ({ basics }) => {
+  const { birthday, location, phone, email } = basics;
 
   return (
     <section id='details'>
