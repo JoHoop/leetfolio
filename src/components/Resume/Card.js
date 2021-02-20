@@ -4,7 +4,7 @@ export const Card = ({ basics }) => {
   const { name, label, location } = basics;
 
   return (
-    <div id='bio'>
+    <div id='card'>
       <figure>
         <img src='./avatar.png' alt='avatar' />
       </figure>

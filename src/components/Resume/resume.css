@@ -62,10 +62,6 @@ a:hover {
   text-decoration: underline;
 }
 
-html {
-  min-height: 100%;
-}
-
 body {
   padding: 0;
   margin: 0;
@@ -172,40 +168,40 @@ aside section:last-of-type {
   }
 }
 
-#bio {
+#card {
   overflow: auto;
 }
-#bio figure {
+#card figure {
   margin-right: 30px;
   float: left;
   width: 80px;
   height: 80px;
   border-radius: 40px;
 }
-#bio figure img {
+#card figure img {
   width: 100%;
   height: 100%;
   border-radius: 40px;
   object-fit: cover;
 }
-#bio div {
+#card div {
   float: left;
 }
-#bio div span {
+#card div span {
   display: block;
 }
-#bio div span.location {
+#card div span.location {
   color: #858585;
 }
 @media screen and (min-width: 768px) {
-  #bio figure {
+  #card figure {
     width: 100px;
     height: 100px;
   }
-  #bio figure img {
+  #card figure img {
     border-radius: 50px;
   }
-  #bio div {
+  #card div {
     margin-top: 0.5em;
   }
 }
