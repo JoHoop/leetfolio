@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -6,7 +7,6 @@ import {
   Tooltip,
   IconButton,
   Zoom,
-  Link,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeToggle } from '../theme/ThemeToggle';
@@ -56,25 +56,25 @@ export const Header = () => {
         </Typography>
         <nav>
           <Link
+            to='/'
             variant='button'
             color='textPrimary'
-            href='/'
             className={classes.link}
           >
             Home
           </Link>
           <Link
+            to='/editor'
             variant='button'
             color='textPrimary'
-            href='/editor'
             className={classes.link}
           >
             Editor
           </Link>
           <Link
+            to='/resume'
             variant='button'
             color='textPrimary'
-            href='/resume'
             className={classes.link}
           >
             Resume
