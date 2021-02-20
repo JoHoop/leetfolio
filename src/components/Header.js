@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -7,6 +7,7 @@ import {
   Tooltip,
   IconButton,
   Zoom,
+  Link,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeToggle } from '../theme/ThemeToggle';
@@ -56,26 +57,32 @@ export const Header = () => {
         </Typography>
         <nav>
           <Link
+            component={NavLink}
             to='/'
             variant='button'
             color='textPrimary'
             className={classes.link}
+            activeClassName='Mui-selected'
           >
             Home
           </Link>
           <Link
+            component={NavLink}
             to='/editor'
             variant='button'
             color='textPrimary'
             className={classes.link}
+            activeClassName='Mui-selected'
           >
             Editor
           </Link>
           <Link
+            component={NavLink}
             to='/resume'
             variant='button'
             color='textPrimary'
             className={classes.link}
+            activeClassName='Mui-selected'
           >
             Resume
           </Link>
