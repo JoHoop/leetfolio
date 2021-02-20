@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from '@rjsf/material-ui';
 import { schema } from '../data/schema';
-import { jsonData as formData } from '../data/jsonData';
+import { jsonData } from '../data/jsonData';
 
 export const Editor = () => {
+  const [formData, setFormData] = useState(jsonData);
+
   const onChange = ({ formData }) => {
+    setFormData(formData);
     console.log('onChange: ', formData);
   };
 
