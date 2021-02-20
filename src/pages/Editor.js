@@ -4,8 +4,6 @@ import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
 import resumeData from '../data/resume.json';
 
-console.log(JSON.stringify(schema));
-
 export const Editor = () => {
   const [formData, setFormData] = useState(resumeData);
 
