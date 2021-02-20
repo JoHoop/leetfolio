@@ -6,11 +6,6 @@ import resumeData from '../data/resume.json';
 
 console.log(JSON.stringify(schema));
 
-const uiSchema = {
-  $schema: { 'ui:widget': 'hidden' },
-  meta: { properties: { canoncial: { 'ui:widget': 'hidden' } } },
-};
-
 export const Editor = () => {
   const [formData, setFormData] = useState(resumeData);
 
@@ -30,7 +25,6 @@ export const Editor = () => {
   return (
     <Form
       schema={schema}
-      uiSchema={uiSchema}
       formData={formData}
       onChange={onChange}
       onSubmit={onSubmit}
