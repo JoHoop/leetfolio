@@ -9,7 +9,7 @@ import { Languages } from '../components/Resume/Languages';
 import { Profile } from '../components/Resume/Profile';
 import { Tools } from '../components/Resume/Tools';
 
-import { jsonData as data } from '../data/jsonData';
+import data from '../data/resume.json';
 
 export const Resume = () => {
   const { basics, education, work, skills, languages } = data;

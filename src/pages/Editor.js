@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
-import { schema } from '../data/schema';
-import { jsonData } from '../data/jsonData';
+import schema from '../data/schema.json';
+import resumeData from '../data/resume.json';
 
 console.log(JSON.stringify(schema));
 
 const uiSchema = {
   $schema: { 'ui:widget': 'hidden' },
-  meta: { 'ui:widget': 'hidden' },
+  meta: { properties: { canoncial: { 'ui:widget': 'hidden' } } },
 };
 
 export const Editor = () => {
-  const [formData, setFormData] = useState(jsonData);
+  const [formData, setFormData] = useState(resumeData);
 
   const onChange = ({ formData }) => {
     setFormData(formData);
