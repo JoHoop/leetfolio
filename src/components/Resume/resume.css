@@ -206,18 +206,19 @@ aside section:last-of-type {
   }
 }
 
-footer {
+.footer {
   width: 100%;
   clear: left;
   box-sizing: border-box;
   border-top: 1px solid #ebebeb;
   padding: 2em;
+  display: block;
 }
-footer span {
+.footer span {
   color: #858585;
 }
 @media screen and (min-width: 768px) {
-  footer {
+  .footer {
     padding: 2em 4em;
   }
 }

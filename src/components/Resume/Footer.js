@@ -4,7 +4,7 @@ export const Footer = ({ basics }) => {
   const { name } = basics;
 
   return (
-    <footer>
+    <div className={'footer'}>
       <p>
         Copyright {new Date().getFullYear()} &copy; {name}
         {' | '}
@@ -16,6 +16,6 @@ export const Footer = ({ basics }) => {
           GitHub
         </a>
       </p>
-    </footer>
+    </div>
   );
 };
