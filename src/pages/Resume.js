@@ -1,5 +1,5 @@
-import React from 'react';
-import '../components/Resume/resume.css';
+import React, { useContext } from 'react';
+import { ResumeContext } from '../components/Resume/ResumeProvider';
 import { Card } from '../components/Resume/Card';
 import { Details } from '../components/Resume/Details';
 import { Education } from '../components/Resume/Education';
@@ -8,11 +8,11 @@ import { Footer } from '../components/Resume/Footer';
 import { Languages } from '../components/Resume/Languages';
 import { Profile } from '../components/Resume/Profile';
 import { Tools } from '../components/Resume/Tools';
-
-import data from '../data/resume.json';
+import '../components/Resume/resume.css';
 
 export const Resume = () => {
-  const { basics, education, work, skills, languages } = data;
+  const { resume } = useContext(ResumeContext);
+  const { basics, education, work, skills, languages } = resume;
 
   return (
     <div id='main-wrapper'>

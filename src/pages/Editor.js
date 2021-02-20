@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { ResumeContext } from '../components/Resume/ResumeProvider';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
-import resumeData from '../data/resume.json';
 
 export const Editor = () => {
-  const [formData, setFormData] = useState(resumeData);
+  const { resume, setResume } = useContext(ResumeContext);
 
   const onChange = ({ formData }) => {
-    setFormData(formData);
+    setResume(formData);
     console.log('onChange: ', formData);
   };
 
@@ -23,7 +23,7 @@ export const Editor = () => {
   return (
     <Form
       schema={schema}
-      formData={formData}
+      formData={resume}
       onChange={onChange}
       onSubmit={onSubmit}
       onError={onError}

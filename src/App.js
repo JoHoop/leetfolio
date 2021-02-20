@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Loading, LoadingError } from './components/Loading';
 import { ThemeProvider } from './theme/ThemeProvider';
+import { ResumeProvider } from './components/Resume/ResumeProvider';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 
@@ -39,25 +40,33 @@ export const App = () => {
 
   return (
     <ThemeProvider>
-      <CssBaseline />
-      <Router>
-        <div className={classes.root}>
-          <Header />
-          <Container maxWidth='md' component='main' className={classes.content}>
-            <ErrorBoundary fallback={<LoadingError />}>
-              <Suspense fallback={<Loading />}>
-                <Switch>
-                  <Route path='/' exact component={Home} />
-                  <Route path='/editor' component={Editor} />
-                  <Route path='/resume' component={Resume} />
-                  <Route path='*' component={PageNotFound} />
-                </Switch>
-              </Suspense>
-            </ErrorBoundary>
-          </Container>
-          <Footer />
-        </div>
-      </Router>
+      <ResumeProvider>
+        <CssBaseline />
+        <Router>
+          <div className={classes.root}>
+            <Header />
+            <Container
+              maxWidth='md'
+              component='main'
+              className={classes.content}
+            >
+              <ErrorBoundary fallback={<LoadingError />}>
+                <Suspense fallback={<Loading />}>
+                  <Switch>
+                    <Route path='/' exact component={Home} />
+
+                    <Route path='/editor' component={Editor} />
+                    <Route path='/resume' component={Resume} />
+
+                    <Route path='*' component={PageNotFound} />
+                  </Switch>
+                </Suspense>
+              </ErrorBoundary>
+            </Container>
+            <Footer />
+          </div>
+        </Router>
+      </ResumeProvider>
     </ThemeProvider>
   );
 };
