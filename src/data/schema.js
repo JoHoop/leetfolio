@@ -1,5 +1,7 @@
 import resumeSchema from 'resume-schema';
 
+export const schema = resumeSchema.schema;
+
 export const validate = () => {
   resumeSchema.validate(
     { name: 'Thomas' },
