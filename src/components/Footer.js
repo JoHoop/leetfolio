@@ -14,14 +14,10 @@ export const Footer = () => {
   const classes = useStyles();
 
   return (
-    <>
-      <footer className={classes.footer}>
-        <Container maxWidth='md'>
-          <Typography variant='body1'>
-            React Web App using Material-UI
-          </Typography>
-        </Container>
-      </footer>
-    </>
+    <footer className={classes.footer}>
+      <Container maxWidth='md'>
+        <Typography variant='body1'>React Web App using Material-UI</Typography>
+      </Container>
+    </footer>
   );
 };

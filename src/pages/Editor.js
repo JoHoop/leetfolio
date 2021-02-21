@@ -22,7 +22,7 @@ export const Editor = () => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <Button color='primary' onClick={setDefault}>
         Load
       </Button>
@@ -38,6 +38,6 @@ export const Editor = () => {
         additionalMetaSchemas={[metaSchemaDraft04]}
         liveValidate
       />
-    </>
+    </React.Fragment>
   );
 };
