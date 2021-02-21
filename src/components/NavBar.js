@@ -1,28 +1,34 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  Drawer,
+  CssBaseline,
+  AppBar,
+  Button,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Menu,
+  Slide,
+  useScrollTrigger,
+  Fab,
+  Zoom,
+  MenuItem,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+  useTheme,
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Slide from '@material-ui/core/Slide';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const drawerWidth = 240;
 
@@ -87,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HideOnScroll(props) {
+export const HideOnScroll = (props) => {
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
@@ -99,7 +105,38 @@ function HideOnScroll(props) {
       {children}
     </Slide>
   );
-}
+};
+
+export const ScrollTop = (props) => {
+  const { children, window } = props;
+  const classes = useStyles();
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      '#back-to-top-anchor'
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role='presentation' className={classes.root}>
+        {children}
+      </div>
+    </Zoom>
+  );
+};
 
 export const NavBar = () => {
   const classes = useStyles();
@@ -227,6 +264,11 @@ export const NavBar = () => {
           ))}
         </List>
       </Drawer>
+      <ScrollTop>
+        <Fab color='secondary' size='small' aria-label='scroll back to top'>
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
