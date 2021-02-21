@@ -8,6 +8,8 @@ import { ResumeProvider } from './components/Resume/ResumeProvider';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 
+import { NavBar } from './components/NavBar';
+
 const Home = lazy(() =>
   import('./pages/Home').then((module) => ({ default: module.Home }))
 );
@@ -54,10 +56,9 @@ export const App = () => {
                 <Suspense fallback={<Loading />}>
                   <Switch>
                     <Route path='/' exact component={Home} />
-
                     <Route path='/editor' component={Editor} />
                     <Route path='/resume' component={Resume} />
-
+                    <Route path='/navbar' component={NavBar} />
                     <Route path='*' component={PageNotFound} />
                   </Switch>
                 </Suspense>
