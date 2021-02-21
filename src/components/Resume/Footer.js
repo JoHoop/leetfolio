@@ -12,7 +12,7 @@ export const Footer = ({ basics }) => {
         <a
           target={'_blank'}
           rel={'noreferrer'}
-          href={'https://github.com/JoHoop/CimpleV'}
+          href={'https://github.com/JoHoop/leetfolio'}
         >
           GitHub
         </a>

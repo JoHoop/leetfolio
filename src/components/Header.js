@@ -96,7 +96,7 @@ export const Header = () => {
               color='inherit'
               aria-label={'GitHub repo'}
               className={classes.iconButton}
-              href='https://github.com/JoHoop/CimpleV'
+              href='https://github.com/JoHoop/leetfolio'
               target='_blank'
               rel='noreferrer'
             >
