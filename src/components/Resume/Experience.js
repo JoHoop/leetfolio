@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 export const Experience = ({ work }) => {
   const items = work.map((experience) => {
@@ -31,9 +32,9 @@ export const Experience = ({ work }) => {
   return (
     <section className={'lists'} id='experience'>
       <h2>Experience</h2>
-      <div className={'wrapper'}>
+      <Box className={'wrapper'}>
         <ul>{items}</ul>
-      </div>
+      </Box>
     </section>
   );
 };

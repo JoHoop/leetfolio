@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 export const Details = ({ basics }) => {
   const { birthday, location, phone, email } = basics;
@@ -6,7 +7,7 @@ export const Details = ({ basics }) => {
   return (
     <section id='details'>
       <h2>Details</h2>
-      <div className={'wrapper'}>
+      <Box className={'wrapper'}>
         <ul>
           <li>{birthday}</li>
           <li>{location.address}</li>
@@ -17,7 +18,7 @@ export const Details = ({ basics }) => {
             <a href={`mailto:${email}`}>{email}</a>
           </li>
         </ul>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Box } from '@material-ui/core';
 import { ResumeContext } from '../components/Resume/ResumeProvider';
 import { Card } from '../components/Resume/Card';
 import { Details } from '../components/Resume/Details';
@@ -15,19 +16,19 @@ export const Resume = () => {
   const { basics, education, work, skills, languages } = resume;
 
   return (
-    <div id='main-wrapper'>
-      <div id='information'>
+    <Box id='main-wrapper'>
+      <Box id='information'>
         <Card basics={basics} />
         <Profile basics={basics} />
         <Experience work={work} />
         <Education education={education} />
-      </div>
+      </Box>
       <aside>
         <Details basics={basics} />
         <Languages languages={languages} />
         <Tools skills={skills} />
       </aside>
       <Footer basics={basics} />
-    </div>
+    </Box>
   );
 };

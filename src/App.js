@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { CssBaseline, Container, makeStyles } from '@material-ui/core';
+import { CssBaseline, Container, Box, makeStyles } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Loading, LoadingError } from './components/Loading';
@@ -43,7 +43,7 @@ export const App = () => {
       <ResumeProvider>
         <CssBaseline />
         <Router>
-          <div className={classes.root}>
+          <Box className={classes.root}>
             <Header />
             <Container
               maxWidth='md'
@@ -64,7 +64,7 @@ export const App = () => {
               </ErrorBoundary>
             </Container>
             <Footer />
-          </div>
+          </Box>
         </Router>
       </ResumeProvider>
     </ThemeProvider>

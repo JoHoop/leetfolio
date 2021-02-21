@@ -1,10 +1,11 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 export const Footer = ({ basics }) => {
   const { name } = basics;
 
   return (
-    <div className={'footer'}>
+    <Box className={'footer'}>
       <p>
         Copyright {new Date().getFullYear()} &copy; {name}
         {' | '}
@@ -16,6 +17,6 @@ export const Footer = ({ basics }) => {
           GitHub
         </a>
       </p>
-    </div>
+    </Box>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 export const Education = ({ education }) => {
   const items = education.map((education) => {
@@ -20,9 +21,9 @@ export const Education = ({ education }) => {
   return (
     <section className={'lists'} id='education'>
       <h2>Education</h2>
-      <div className={'wrapper'}>
+      <Box className={'wrapper'}>
         <ul>{items}</ul>
-      </div>
+      </Box>
     </section>
   );
 };

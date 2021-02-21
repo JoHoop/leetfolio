@@ -1,35 +1,36 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 export const Tools = () => {
   return (
     <section>
       <h2>Tools</h2>
-      <div className={'wrapper'}>
+      <Box className={'wrapper'}>
         <ul>
           <li>
             <p>Adobe Photoshop</p>
-            <div className={'skillbar'}>
-              <div className={'fill'} style={{ width: '95%' }}></div>
-            </div>
+            <Box className={'skillbar'}>
+              <Box className={'fill'} style={{ width: '95%' }}></Box>
+            </Box>
           </li>
         </ul>
         <ul>
           <li>
             <p>Adobe Illustrator</p>
-            <div className={'skillbar'}>
-              <div className={'fill'} style={{ width: '85%' }}></div>
-            </div>
+            <Box className={'skillbar'}>
+              <Box className={'fill'} style={{ width: '85%' }}></Box>
+            </Box>
           </li>
         </ul>
         <ul>
           <li>
             <p>Adobe After Effects</p>
-            <div className={'skillbar'}>
-              <div className={'fill'} style={{ width: '55%' }}></div>
-            </div>
+            <Box className={'skillbar'}>
+              <Box className={'fill'} style={{ width: '55%' }}></Box>
+            </Box>
           </li>
         </ul>
-      </div>
+      </Box>
     </section>
   );
 };

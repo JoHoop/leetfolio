@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 export const Languages = ({ languages }) => {
   const items = languages.map((item) => {
@@ -17,7 +18,7 @@ export const Languages = ({ languages }) => {
   return (
     <section>
       <h2>Languages</h2>
-      <div className={'wrapper'}>{items}</div>
+      <Box className={'wrapper'}>{items}</Box>
     </section>
   );
 };
