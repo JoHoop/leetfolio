@@ -62,14 +62,6 @@ a:hover {
   text-decoration: underline;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  background-color: #329cb9;
-  background-image: -webkit-linear-gradient(-405deg, #329cb9, #248daa);
-  background-image: linear-gradient(135deg, #329cb9, #248daa);
-}
-
 #main-wrapper {
   background-color: #fefefe;
   margin: 0 auto;
