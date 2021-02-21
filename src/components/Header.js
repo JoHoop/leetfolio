@@ -1,110 +1,280 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import clsx from 'clsx';
 import {
+  Drawer,
   AppBar,
+  Button,
   Toolbar,
+  List,
   Typography,
-  Tooltip,
+  Divider,
   IconButton,
+  Menu,
+  Slide,
+  useScrollTrigger,
+  Fab,
   Zoom,
-  Link,
+  MenuItem,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+  useTheme,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { ThemeToggle } from '../theme/ThemeToggle';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    backgroundColor: theme.palette.background,
+  root: {
+    display: 'flex',
   },
-  toolbar: {
-    flexWrap: 'wrap',
-  },
-  toolbarTitle: {
+  title: {
     flexGrow: 1,
   },
-  iconButton: {
-    height: '2.5rem',
-    width: '2.5rem',
+  appBar: {
+    backgroundColor: theme.palette.background,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
-  icon: {
-    fontSize: '1.25rem',
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
-  link: {
-    margin: theme.spacing(1, 1.5),
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
   },
 }));
 
-export const Header = () => {
-  const classes = useStyles();
+export const HideOnScroll = (props) => {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
   return (
-    <AppBar
-      position='static'
-      color='default'
-      elevation={0}
-      className={classes.appBar}
-    >
-      <Toolbar className={classes.toolbar}>
-        <Typography
-          variant='h6'
-          color='inherit'
-          noWrap
-          className={classes.toolbarTitle}
+    <Slide appear={false} direction='down' in={!trigger}>
+      {children}
+    </Slide>
+  );
+};
+
+export const ScrollTop = (props) => {
+  const { children, window } = props;
+  const classes = useStyles();
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      '#back-to-top-anchor'
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role='presentation' className={classes.root}>
+        {children}
+      </div>
+    </Zoom>
+  );
+};
+
+export const Header = ({ children }) => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const loggedIn = false;
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const profileOpen = Boolean(anchorEl);
+
+  return (
+    <div className={classes.root}>
+      <HideOnScroll>
+        <AppBar
+          position='fixed'
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
         >
-          React App
-        </Typography>
-        <nav>
-          <Link
-            component={NavLink}
-            to='/'
-            variant='button'
-            color='textPrimary'
-            className={classes.link}
-            activeClassName='Mui-selected'
-          >
-            Home
-          </Link>
-          <Link
-            component={NavLink}
-            to='/editor'
-            variant='button'
-            color='textPrimary'
-            className={classes.link}
-            activeClassName='Mui-selected'
-          >
-            Editor
-          </Link>
-          <Link
-            component={NavLink}
-            to='/resume'
-            variant='button'
-            color='textPrimary'
-            className={classes.link}
-            activeClassName='Mui-selected'
-          >
-            Resume
-          </Link>
-          <ThemeToggle />
-          <Tooltip
-            title={'GitHub repo'}
-            placement='bottom'
-            TransitionComponent={Zoom}
-          >
+          <Toolbar>
             <IconButton
               color='inherit'
-              aria-label={'GitHub repo'}
-              className={classes.iconButton}
-              href='https://github.com/JoHoop/leetfolio'
-              target='_blank'
-              rel='noreferrer'
+              aria-label='open drawer'
+              onClick={handleDrawerOpen}
+              edge='start'
+              className={clsx(classes.menuButton, open && classes.hide)}
             >
-              <GitHubIcon className={classes.icon} />
+              <MenuIcon />
             </IconButton>
-          </Tooltip>
-        </nav>
-      </Toolbar>
-    </AppBar>
+            <Typography variant='h6' className={classes.title} noWrap>
+              Persistent drawer
+            </Typography>
+            {loggedIn ? (
+              <div>
+                <IconButton
+                  aria-label='account of current user'
+                  aria-controls='menu-appbar'
+                  aria-haspopup='true'
+                  onClick={handleMenu}
+                  color='inherit'
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id='menu-appbar'
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={profileOpen}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Settings</MenuItem>
+                  <MenuItem onClick={handleClose}>Sign out</MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <Button color='inherit'>Login</Button>
+            )}
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+      <Drawer
+        className={classes.drawer}
+        variant='persistent'
+        anchor='left'
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        {children}
+      </main>
+      <ScrollTop>
+        <Fab color='secondary' size='small' aria-label='scroll back to top'>
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
+    </div>
   );
 };
