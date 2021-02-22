@@ -22,6 +22,7 @@ import {
   ListItemText,
   makeStyles,
   useTheme,
+  Link,
   useMediaQuery,
   useScrollTrigger,
 } from '@material-ui/core';
@@ -105,6 +106,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
+  },
+  footer: {
+    padding: theme.spacing(2, 2),
+    marginTop: 'auto',
   },
 }));
 
@@ -317,6 +322,20 @@ export const Header = ({ children }) => {
             <ListItemText primary={'Sign out'} />
           </ListItem>
         </List>
+
+        <Typography
+          variant='body2'
+          color='textSecondary'
+          align='center'
+          className={classes.footer}
+        >
+          {'Copyright © '}
+          <Link color='inherit' href='https://leetfolio.com'>
+            LeetFolio
+          </Link>{' '}
+          {new Date().getFullYear()}
+          {'.'}
+        </Typography>
       </Drawer>
       <main
         className={clsx(classes.content, {
