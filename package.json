@@ -8,6 +8,8 @@
     "@rjsf/core": "^2.4.2",
     "@rjsf/material-ui": "^2.4.2",
     "deepmerge": "^4.2.2",
+    "firebase": "^8.2.9",
+    "firebase-admin": "^9.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
