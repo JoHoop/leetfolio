@@ -194,7 +194,7 @@ export const Header = ({ children }) => {
             [classes.appBarShift]: open,
           })}
         >
-          <Toolbar>
+          <Toolbar id='back-to-top-anchor'>
             <IconButton
               color='inherit'
               aria-label='open drawer'
@@ -268,7 +268,6 @@ export const Header = ({ children }) => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Toolbar id='back-to-top-anchor' />
       <Drawer
         className={classes.drawer}
         variant='persistent'
