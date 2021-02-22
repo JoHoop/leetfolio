@@ -187,6 +187,7 @@ export const Header = ({ children }) => {
       <HideOnScroll>
         <AppBar
           position='fixed'
+          color='default'
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
