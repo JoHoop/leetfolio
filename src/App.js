@@ -5,6 +5,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { Loading, LoadingError } from './components/Loading';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { ResumeProvider } from './components/Resume/ResumeProvider';
+import { PrivateRoute } from './components/PrivateRoute.js';
 import { Header } from './components/Header';
 
 const Home = lazy(() =>
@@ -15,6 +16,18 @@ const Editor = lazy(() =>
 );
 const Resume = lazy(() =>
   import('./pages/Resume').then((module) => ({ default: module.Resume }))
+);
+const SignIn = lazy(() =>
+  import('./pages/SignIn').then((module) => ({ default: module.SignIn }))
+);
+const SignUp = lazy(() =>
+  import('./pages/SignUp').then((module) => ({ default: module.SignUp }))
+);
+const Reset = lazy(() =>
+  import('./pages/Reset').then((module) => ({ default: module.Reset }))
+);
+const Account = lazy(() =>
+  import('./pages/Account').then((module) => ({ default: module.Account }))
 );
 const PageNotFound = lazy(() =>
   import('./pages/PageNotFound').then((module) => ({
@@ -57,6 +70,10 @@ export const App = () => {
                       <Route path='/' exact component={Home} />
                       <Route path='/editor' component={Editor} />
                       <Route path='/resume' component={Resume} />
+                      <Route path='/signin' component={SignIn} />
+                      <Route path='/signup' component={SignUp} />
+                      <Route path='/reset' component={Reset} />
+                      <PrivateRoute path='/account' component={Account} />
                       <Route path='*' component={PageNotFound} />
                     </Switch>
                   </Suspense>
