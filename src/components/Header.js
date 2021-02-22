@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import {
   Drawer,
@@ -16,7 +17,6 @@ import {
   Zoom,
   MenuItem,
   ListItem,
-  ListItemIcon,
   ListItemText,
   makeStyles,
   useTheme,
@@ -24,8 +24,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
@@ -241,13 +239,13 @@ export const Header = ({ children }) => {
         </div>
         <Divider />
         <List>
-          <ListItem button key={'home'}>
+          <ListItem button key={'home'} component={NavLink} to='/'>
             <ListItemText primary={'Home'} />
           </ListItem>
-          <ListItem button key={'editor'}>
+          <ListItem button key={'editor'} component={NavLink} to='/editor'>
             <ListItemText primary={'Editor'} />
           </ListItem>
-          <ListItem button key={'resume'}>
+          <ListItem button key={'resume'} component={NavLink} to='/resume'>
             <ListItemText primary={'Resume'} />
           </ListItem>
         </List>
