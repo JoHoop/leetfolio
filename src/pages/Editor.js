@@ -22,7 +22,15 @@ export const Editor = () => {
   };
 
   const handleCapture = ({ target }) => {
-    console.log(target.files[0]);
+    const file = target.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        const content = JSON.parse(reader.result);
+        setResume(content);
+      };
+      reader.readAsText(file);
+    }
   };
 
   return (
