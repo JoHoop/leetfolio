@@ -19,6 +19,7 @@ import {
   MenuItem,
   Tooltip,
   ListItem,
+  ListItemIcon,
   ListItemText,
   makeStyles,
   useTheme,
@@ -30,6 +31,13 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { ThemeToggle } from '../theme/ThemeToggle';
+import {
+  AccountBox,
+  Description,
+  ExitToApp,
+  Home,
+  ListAlt,
+} from '@material-ui/icons';
 
 const drawerWidth = 240;
 
@@ -267,21 +275,36 @@ export const Header = ({ children }) => {
         <Divider />
         <List>
           <ListItem button key={'home'} component={NavLink} to='/'>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
             <ListItemText primary={'Home'} />
           </ListItem>
           <ListItem button key={'editor'} component={NavLink} to='/editor'>
+            <ListItemIcon>
+              <ListAlt />
+            </ListItemIcon>
             <ListItemText primary={'Editor'} />
           </ListItem>
           <ListItem button key={'resume'} component={NavLink} to='/resume'>
+            <ListItemIcon>
+              <Description />
+            </ListItemIcon>
             <ListItemText primary={'Resume'} />
           </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem button key={'settings'}>
-            <ListItemText primary={'Settings'} />
+          <ListItem button key={'account'}>
+            <ListItemIcon>
+              <AccountBox />
+            </ListItemIcon>
+            <ListItemText primary={'Account'} />
           </ListItem>
           <ListItem button key={'signout'}>
+            <ListItemIcon>
+              <ExitToApp />
+            </ListItemIcon>
             <ListItemText primary={'Sign out'} />
           </ListItem>
         </List>
