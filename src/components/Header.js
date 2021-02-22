@@ -13,7 +13,6 @@ import {
   IconButton,
   Menu,
   Slide,
-  useScrollTrigger,
   Fab,
   Zoom,
   MenuItem,
@@ -24,6 +23,7 @@ import {
   makeStyles,
   useTheme,
   useMediaQuery,
+  useScrollTrigger,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -101,14 +101,15 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  backToTop: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
 }));
 
-export const HideOnScroll = (props) => {
-  const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+export const HideOnScroll = ({ children }) => {
+  const trigger = useScrollTrigger();
 
   return (
     <Slide appear={false} direction='down' in={!trigger}>
@@ -117,14 +118,9 @@ export const HideOnScroll = (props) => {
   );
 };
 
-export const ScrollTop = (props) => {
-  const { children, window } = props;
+export const ScrollTop = ({ children }) => {
   const classes = useStyles();
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
     disableHysteresis: true,
     threshold: 100,
   });
@@ -141,7 +137,11 @@ export const ScrollTop = (props) => {
 
   return (
     <Zoom in={trigger}>
-      <div onClick={handleClick} role='presentation' className={classes.root}>
+      <div
+        onClick={handleClick}
+        role='presentation'
+        className={classes.backToTop}
+      >
         {children}
       </div>
     </Zoom>
@@ -156,8 +156,6 @@ export const Header = ({ children }) => {
     defaultMatches: true,
     noSsr: true,
   });
-
-  console.log(isDesktop);
 
   const [open, setOpen] = React.useState(isDesktop);
 
@@ -264,6 +262,7 @@ export const Header = ({ children }) => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
+      <Toolbar id='back-to-top-anchor' />
       <Drawer
         className={classes.drawer}
         variant='persistent'
@@ -328,7 +327,7 @@ export const Header = ({ children }) => {
         {children}
       </main>
       <ScrollTop>
-        <Fab color='secondary' size='small' aria-label='scroll back to top'>
+        <Fab color='default' size='small' aria-label='scroll back to top'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
