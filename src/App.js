@@ -6,7 +6,6 @@ import { Loading, LoadingError } from './components/Loading';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { ResumeProvider } from './components/Resume/ResumeProvider';
 import { Header } from './components/Header';
-import { Footer } from './components/Footer';
 
 const Home = lazy(() =>
   import('./pages/Home').then((module) => ({ default: module.Home }))
@@ -65,7 +64,6 @@ export const App = () => {
               </Container>
             </Header>
           </Box>
-          <Footer />
         </Router>
       </ResumeProvider>
     </ThemeProvider>
