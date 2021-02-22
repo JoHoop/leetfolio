@@ -158,7 +158,7 @@ export const Header = ({ children }) => {
     setAnchorEl(null);
   };
 
-  const loggedIn = false;
+  const loggedIn = true;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const profileOpen = Boolean(anchorEl);
@@ -183,7 +183,7 @@ export const Header = ({ children }) => {
               <MenuIcon />
             </IconButton>
             <Typography variant='h6' className={classes.title} noWrap>
-              Persistent drawer
+              LeetFolio
             </Typography>
             {loggedIn ? (
               <div>
@@ -241,25 +241,24 @@ export const Header = ({ children }) => {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key={'home'}>
+            <ListItemText primary={'Home'} />
+          </ListItem>
+          <ListItem button key={'editor'}>
+            <ListItemText primary={'Editor'} />
+          </ListItem>
+          <ListItem button key={'resume'}>
+            <ListItemText primary={'Resume'} />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key={'settings'}>
+            <ListItemText primary={'Settings'} />
+          </ListItem>
+          <ListItem button key={'signout'}>
+            <ListItemText primary={'Sign out'} />
+          </ListItem>
         </List>
       </Drawer>
       <main
