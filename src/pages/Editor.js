@@ -21,12 +21,38 @@ export const Editor = () => {
     console.log('errors');
   };
 
+  const handleCapture = ({ target }) => {
+    console.log(target.files[0]);
+  };
+
   return (
     <React.Fragment>
-      <Button color='primary' onClick={setDefault}>
-        Load
+      <input
+        type='file'
+        accept='application/json'
+        id='contained-button-file'
+        onChange={handleCapture}
+        hidden
+      />
+      <label htmlFor='contained-button-file'>
+        <Button variant='contained' component='span'>
+          Upload
+        </Button>
+      </label>
+      <Button
+        variant='contained'
+        href={`data:text/json;charset=utf-8,${encodeURIComponent(
+          JSON.stringify(resume)
+        )}`}
+        download='resume.json'
+      >
+        Download
       </Button>
-      <Button color='secondary' onClick={setEmpty}>
+      <Button variant='contained' onClick={setDefault}>
+        Load default
+      </Button>
+
+      <Button variant='contained' onClick={setEmpty}>
         Reset
       </Button>
       <Form
