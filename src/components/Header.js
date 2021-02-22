@@ -7,6 +7,7 @@ import {
   Button,
   Toolbar,
   List,
+  Box,
   Typography,
   Divider,
   IconButton,
@@ -16,6 +17,7 @@ import {
   Fab,
   Zoom,
   MenuItem,
+  Tooltip,
   ListItem,
   ListItemText,
   makeStyles,
@@ -26,6 +28,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import { ThemeToggle } from '../theme/ThemeToggle';
 
 const drawerWidth = 240;
 
@@ -184,16 +188,22 @@ export const Header = ({ children }) => {
               LeetFolio
             </Typography>
             {loggedIn ? (
-              <div>
-                <IconButton
-                  aria-label='account of current user'
-                  aria-controls='menu-appbar'
-                  aria-haspopup='true'
-                  onClick={handleMenu}
-                  color='inherit'
+              <Box>
+                <Tooltip
+                  title={'Account'}
+                  placement='bottom'
+                  TransitionComponent={Zoom}
                 >
-                  <AccountCircle />
-                </IconButton>
+                  <IconButton
+                    aria-label='account of current user'
+                    aria-controls='menu-appbar'
+                    aria-haspopup='true'
+                    onClick={handleMenu}
+                    color='inherit'
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </Tooltip>
                 <Menu
                   id='menu-appbar'
                   anchorEl={anchorEl}
@@ -212,10 +222,27 @@ export const Header = ({ children }) => {
                   <MenuItem onClick={handleClose}>Settings</MenuItem>
                   <MenuItem onClick={handleClose}>Sign out</MenuItem>
                 </Menu>
-              </div>
+              </Box>
             ) : (
               <Button color='inherit'>Login</Button>
             )}
+            <ThemeToggle />
+            <Tooltip
+              title={'GitHub repo'}
+              placement='bottom'
+              TransitionComponent={Zoom}
+            >
+              <IconButton
+                color='inherit'
+                aria-label={'GitHub repo'}
+                className={classes.iconButton}
+                href='https://github.com/JoHoop/leetfolio'
+                target='_blank'
+                rel='noreferrer'
+              >
+                <GitHubIcon className={classes.icon} />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
