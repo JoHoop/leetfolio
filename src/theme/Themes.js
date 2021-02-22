@@ -10,8 +10,6 @@ export const LightTheme = responsiveFontSizes(
       type: 'light',
       primary: {
         main: primary,
-        dark: white,
-        light: black,
       },
       color: black,
     },
@@ -34,8 +32,6 @@ export const DarkTheme = responsiveFontSizes(
       type: 'dark',
       primary: {
         main: primary,
-        dark: black,
-        light: white,
       },
       color: white,
     },
