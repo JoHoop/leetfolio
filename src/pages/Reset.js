@@ -1,12 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { signIn } from '../services/Auth.js';
+import { UserContext } from '../services/UserProvider.js';
+import { isEmailValid, hasEmptyElement } from '../services/Validators';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -70,9 +71,14 @@ export const Reset = () => {
             Reset
           </Button>
           <Grid container>
-            <Grid item>
+            <Grid item xs>
               <Link component={NavLink} to={'/signin'} variant='body2'>
                 Sign in
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link component={NavLink} to={'/signup'} variant='body2'>
+                Don't have an account? Sign up
               </Link>
             </Grid>
           </Grid>

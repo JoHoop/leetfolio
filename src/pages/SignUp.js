@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { signUp, changeUsername } from '../services/Auth.js';
+import { UserContext } from '../services/UserProvider.js';
+import { UseForm } from '../components/UseForm';
+import { isEmailValid } from '../services/Validators';
+import { Loading } from '../components/Loading';
+import {
+  Avatar,
+  Snackbar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  makeStyles,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -33,8 +42,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+};
+
 export const SignUp = () => {
   const classes = useStyles();
+  const [values, handleChange] = UseForm({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const { username, email, password } = values;
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const showError = (error) => {
+    setErrorMessage(`${error.message} (Code: ${error.code})`);
+  };
+
+  const resetError = () => {
+    setErrorMessage('');
+  };
+
+  const handleSignUp = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      await signUp(email, password);
+      await changeUsername(username);
+      console.log('success');
+      return <Redirect to='/account' />;
+    } catch (error) {
+      console.log(error);
+      showError(error);
+    }
+    setIsLoading(false);
+  }, [email, password, username]);
+
+  const { currentUser } = useContext(UserContext);
+
+  if (currentUser) {
+    return <Redirect to='/account' />;
+  }
+
+  const emailInputValid = () => {
+    return email === '' || isEmailValid(email);
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -48,27 +102,18 @@ export const SignUp = () => {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete='fname'
-                name='firstName'
+                autoComplete='username'
+                name='username'
                 variant='outlined'
                 required
                 fullWidth
-                id='firstName'
-                label='First Name'
+                id='username'
+                label='Username'
+                value={username}
+                onChange={handleChange}
                 autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='lastName'
-                label='Last Name'
-                name='lastName'
-                autoComplete='lname'
               />
             </Grid>
             <Grid item xs={12}>
@@ -77,9 +122,11 @@ export const SignUp = () => {
                 required
                 fullWidth
                 id='email'
-                label='Email Address'
+                label='Email'
                 name='email'
                 autoComplete='email'
+                value={email}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -92,6 +139,8 @@ export const SignUp = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                value={password}
+                onChange={handleChange}
               />
             </Grid>
           </Grid>
@@ -101,6 +150,8 @@ export const SignUp = () => {
             variant='contained'
             color='primary'
             className={classes.submit}
+            disabled={!emailInputValid}
+            onClick={() => handleSignUp()}
           >
             Sign up
           </Button>
@@ -118,6 +169,16 @@ export const SignUp = () => {
           </Grid>
         </form>
       </Box>
+      {isLoading && <Loading />}
+      <Snackbar
+        open={errorMessage !== ''}
+        autoHideDuration={6000}
+        onClose={resetError}
+      >
+        <Alert onClose={resetError} severity='success'>
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
