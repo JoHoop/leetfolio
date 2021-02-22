@@ -245,7 +245,9 @@ export const Header = ({ children }) => {
                 </Menu>
               </Box>
             ) : (
-              <Button color='inherit'>Login</Button>
+              <Button component={NavLink} to={'/signin'} color='inherit'>
+                Login
+              </Button>
             )}
             <ThemeToggle />
             <Tooltip
@@ -288,19 +290,19 @@ export const Header = ({ children }) => {
         </div>
         <Divider />
         <List>
-          <ListItem button key={'home'} component={NavLink} to='/'>
+          <ListItem button key={'home'} component={NavLink} to={'/'}>
             <ListItemIcon>
               <Home />
             </ListItemIcon>
             <ListItemText primary={'Home'} />
           </ListItem>
-          <ListItem button key={'editor'} component={NavLink} to='/editor'>
+          <ListItem button key={'editor'} component={NavLink} to={'/editor'}>
             <ListItemIcon>
               <ListAlt />
             </ListItemIcon>
             <ListItemText primary={'Editor'} />
           </ListItem>
-          <ListItem button key={'resume'} component={NavLink} to='/resume'>
+          <ListItem button key={'resume'} component={NavLink} to={'/resume'}>
             <ListItemIcon>
               <Description />
             </ListItemIcon>
@@ -311,7 +313,12 @@ export const Header = ({ children }) => {
         <List>
           {currentUser ? (
             <React.Fragment>
-              <ListItem button key={'account'}>
+              <ListItem
+                component={NavLink}
+                to={'/account'}
+                button
+                key={'account'}
+              >
                 <ListItemIcon>
                   <AccountBox />
                 </ListItemIcon>
@@ -325,7 +332,7 @@ export const Header = ({ children }) => {
               </ListItem>
             </React.Fragment>
           ) : (
-            <ListItem button key={'signin'}>
+            <ListItem component={NavLink} to={'/signin'} button key={'signin'}>
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>

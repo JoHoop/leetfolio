@@ -86,12 +86,12 @@ export const SignIn = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link component={NavLink} to='/reset' variant='body2'>
+              <Link component={NavLink} to={'/reset'} variant='body2'>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link component={NavLink} to='/signup' variant='body2'>
+              <Link component={NavLink} to={'/signup'} variant='body2'>
                 Don't have an account? Sign up
               </Link>
             </Grid>

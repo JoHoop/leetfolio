@@ -106,12 +106,12 @@ export const SignUp = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link component={NavLink} to='/reset' variant='body2'>
+              <Link component={NavLink} to={'/reset'} variant='body2'>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link component={NavLink} to='/signin' variant='body2'>
+              <Link component={NavLink} to={'/signin'} variant='body2'>
                 Already have an account? Sign in
               </Link>
             </Grid>

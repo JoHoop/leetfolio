@@ -71,7 +71,7 @@ export const Reset = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Link component={NavLink} to='/signin' variant='body2'>
+              <Link component={NavLink} to={'/signin'} variant='body2'>
                 Sign in
               </Link>
             </Grid>
