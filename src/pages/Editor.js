@@ -59,7 +59,6 @@ export const Editor = () => {
       <Button variant='contained' onClick={setDefault}>
         Load default
       </Button>
-
       <Button variant='contained' onClick={setEmpty}>
         Reset
       </Button>
@@ -70,8 +69,13 @@ export const Editor = () => {
         onSubmit={onSubmit}
         onError={onError}
         additionalMetaSchemas={[metaSchemaDraft04]}
+        autoComplete='on'
         liveValidate
-      />
+      >
+        <Button variant='contained' type='submit'>
+          Submit
+        </Button>
+      </Form>
     </React.Fragment>
   );
 };
