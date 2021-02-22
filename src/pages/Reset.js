@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { signIn } from '../services/Auth.js';
+import { resetPassword } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
-import { isEmailValid, hasEmptyElement } from '../services/Validators';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { isEmailValid } from '../services/Validators';
+import { Loading } from '../components/Loading';
+import {
+  Avatar,
+  Snackbar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  makeStyles,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,15 +34,52 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: '100%',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+};
+
 export const Reset = () => {
   const classes = useStyles();
+  const [emailInput, setEmailInput] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const showError = (error) => {
+    setErrorMessage(`${error.message} (Code: ${error.code})`);
+  };
+
+  const resetError = () => {
+    setErrorMessage('');
+  };
+
+  const handleResetPassword = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      await resetPassword(emailInput);
+      console.log('success');
+    } catch (error) {
+      console.log(error);
+      showError(error);
+    }
+    setIsLoading(false);
+  }, [emailInput]);
+
+  const { currentUser } = useContext(UserContext);
+
+  if (currentUser) {
+    return <Redirect to='/account' />;
+  }
+
+  const emailInputValid = () => {
+    return emailInput === '' || isEmailValid(emailInput);
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -50,25 +92,31 @@ export const Reset = () => {
           Reset password
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
-            autoFocus
-          />
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='email'
+                label='Email'
+                name='email'
+                autoComplete='email'
+                value={emailInput}
+                onChange={(event) => setEmailInput(event.target.value)}
+              />
+            </Grid>
+          </Grid>
           <Button
             type='submit'
             fullWidth
             variant='contained'
             color='primary'
             className={classes.submit}
+            disabled={!emailInputValid}
+            onClick={() => handleResetPassword()}
           >
-            Reset
+            Sign in
           </Button>
           <Grid container>
             <Grid item xs>
@@ -84,6 +132,16 @@ export const Reset = () => {
           </Grid>
         </form>
       </Box>
+      {isLoading && <Loading />}
+      <Snackbar
+        open={errorMessage !== ''}
+        autoHideDuration={6000}
+        onClose={resetError}
+      >
+        <Alert onClose={resetError} severity='success'>
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
