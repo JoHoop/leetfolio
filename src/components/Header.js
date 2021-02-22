@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import { UserContext } from '../services/UserProvider';
 import {
   Drawer,
   AppBar,
@@ -156,6 +157,7 @@ export const ScrollTop = ({ children }) => {
 export const Header = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const { currentUser } = useContext(UserContext);
 
   const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
@@ -179,8 +181,6 @@ export const Header = ({ children }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const loggedIn = true;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const profileOpen = Boolean(anchorEl);
@@ -208,7 +208,7 @@ export const Header = ({ children }) => {
             <Typography variant='h6' className={classes.title} noWrap>
               LeetFolio
             </Typography>
-            {loggedIn ? (
+            {currentUser ? (
               <Box>
                 <Tooltip
                   title={'Account'}
@@ -309,18 +309,29 @@ export const Header = ({ children }) => {
         </List>
         <Divider />
         <List>
-          <ListItem button key={'account'}>
-            <ListItemIcon>
-              <AccountBox />
-            </ListItemIcon>
-            <ListItemText primary={'Account'} />
-          </ListItem>
-          <ListItem button key={'signout'}>
-            <ListItemIcon>
-              <ExitToApp />
-            </ListItemIcon>
-            <ListItemText primary={'Sign out'} />
-          </ListItem>
+          {currentUser ? (
+            <React.Fragment>
+              <ListItem button key={'account'}>
+                <ListItemIcon>
+                  <AccountBox />
+                </ListItemIcon>
+                <ListItemText primary={'Account'} />
+              </ListItem>
+              <ListItem button key={'signout'}>
+                <ListItemIcon>
+                  <ExitToApp />
+                </ListItemIcon>
+                <ListItemText primary={'Sign out'} />
+              </ListItem>
+            </React.Fragment>
+          ) : (
+            <ListItem button key={'signin'}>
+              <ListItemIcon>
+                <ExitToApp />
+              </ListItemIcon>
+              <ListItemText primary={'Sign in'} />
+            </ListItem>
+          )}
         </List>
 
         <Typography

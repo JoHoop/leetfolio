@@ -1,4 +1,4 @@
-import Firebase from '../services/Firebase';
+import Firebase from './Firebase';
 
 export const signUp = (email, password) => {
   return Firebase.auth().createUserWithEmailAndPassword(email, password);

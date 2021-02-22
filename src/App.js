@@ -3,6 +3,7 @@ import { CssBaseline, Container, Box, makeStyles } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Loading, LoadingError } from './components/Loading';
+import { UserProvider } from './services/UserProvider';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { ResumeProvider } from './components/Resume/ResumeProvider';
 import { PrivateRoute } from './components/PrivateRoute.js';
@@ -53,36 +54,38 @@ export const App = () => {
   const classes = useStyles();
 
   return (
-    <ThemeProvider>
-      <ResumeProvider>
-        <CssBaseline />
-        <Router>
-          <Box className={classes.root}>
-            <Header>
-              <Container
-                maxWidth='md'
-                component='main'
-                className={classes.content}
-              >
-                <ErrorBoundary fallback={<LoadingError />}>
-                  <Suspense fallback={<Loading />}>
-                    <Switch>
-                      <Route path='/' exact component={Home} />
-                      <Route path='/editor' component={Editor} />
-                      <Route path='/resume' component={Resume} />
-                      <Route path='/signin' component={SignIn} />
-                      <Route path='/signup' component={SignUp} />
-                      <Route path='/reset' component={Reset} />
-                      <PrivateRoute path='/account' component={Account} />
-                      <Route path='*' component={PageNotFound} />
-                    </Switch>
-                  </Suspense>
-                </ErrorBoundary>
-              </Container>
-            </Header>
-          </Box>
-        </Router>
-      </ResumeProvider>
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider>
+        <ResumeProvider>
+          <CssBaseline />
+          <Router>
+            <Box className={classes.root}>
+              <Header>
+                <Container
+                  maxWidth='md'
+                  component='main'
+                  className={classes.content}
+                >
+                  <ErrorBoundary fallback={<LoadingError />}>
+                    <Suspense fallback={<Loading />}>
+                      <Switch>
+                        <Route path='/' exact component={Home} />
+                        <Route path='/editor' component={Editor} />
+                        <Route path='/resume' component={Resume} />
+                        <Route path='/signin' component={SignIn} />
+                        <Route path='/signup' component={SignUp} />
+                        <Route path='/reset' component={Reset} />
+                        <PrivateRoute path='/account' component={Account} />
+                        <Route path='*' component={PageNotFound} />
+                      </Switch>
+                    </Suspense>
+                  </ErrorBoundary>
+                </Container>
+              </Header>
+            </Box>
+          </Router>
+        </ResumeProvider>
+      </ThemeProvider>
+    </UserProvider>
   );
 };
