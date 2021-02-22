@@ -23,6 +23,7 @@ import {
   ListItemText,
   makeStyles,
   useTheme,
+  useMediaQuery,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -150,7 +151,15 @@ export const ScrollTop = (props) => {
 export const Header = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+
+  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
+    defaultMatches: true,
+    noSsr: true,
+  });
+
+  console.log(isDesktop);
+
+  const [open, setOpen] = React.useState(isDesktop);
 
   const handleDrawerOpen = () => {
     setOpen(true);
