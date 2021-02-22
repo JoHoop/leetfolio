@@ -1,11 +1,21 @@
 import React, { useContext } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Box, makeStyles } from '@material-ui/core';
 import { ResumeContext } from '../components/Resume/ResumeProvider';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
+import { Clear, GetApp, Publish, Replay, Save, Send } from '@material-ui/icons';
+
+const useStyles = makeStyles((theme) => ({
+  buttons: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 export const Editor = () => {
+  const classes = useStyles();
   const { resume, setResume, setDefault, setEmpty } = useContext(ResumeContext);
 
   const onChange = ({ formData }) => {
@@ -35,33 +45,37 @@ export const Editor = () => {
 
   return (
     <React.Fragment>
-      <input
-        type='file'
-        accept='application/json'
-        id='contained-button-file'
-        onChange={handleCapture}
-        hidden
-      />
-      <label htmlFor='contained-button-file'>
-        <Button variant='contained' component='span'>
-          Upload
+      <Box className={classes.buttons}>
+        <input
+          type='file'
+          accept='application/json'
+          id='contained-button-file'
+          onChange={handleCapture}
+          hidden
+        />
+        <label htmlFor='contained-button-file'>
+          <Button variant='contained' startIcon={<Publish />} component='span'>
+            Upload
+          </Button>
+        </label>
+        <Button
+          variant='contained'
+          startIcon={<GetApp />}
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(resume)
+          )}`}
+          download='resume.json'
+        >
+          Download
         </Button>
-      </label>
-      <Button
-        variant='contained'
-        href={`data:text/json;charset=utf-8,${encodeURIComponent(
-          JSON.stringify(resume)
-        )}`}
-        download='resume.json'
-      >
-        Download
-      </Button>
-      <Button variant='contained' onClick={setDefault}>
-        Load default
-      </Button>
-      <Button variant='contained' onClick={setEmpty}>
-        Reset
-      </Button>
+        <Button variant='contained' startIcon={<Replay />} onClick={setDefault}>
+          Default
+        </Button>
+        <Button variant='contained' startIcon={<Clear />} onClick={setEmpty}>
+          Reset
+        </Button>
+      </Box>
+
       <Form
         schema={schema}
         formData={resume}
@@ -72,7 +86,7 @@ export const Editor = () => {
         autoComplete='on'
         liveValidate
       >
-        <Button variant='contained' type='submit'>
+        <Button variant='contained' startIcon={<Save />} type='submit'>
           Submit
         </Button>
       </Form>

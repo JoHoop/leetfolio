@@ -244,8 +244,13 @@ export const Header = ({ children }) => {
                 </Menu>
               </Box>
             ) : (
-              <Button component={NavLink} to={'/signin'} color='inherit'>
-                Login
+              <Button
+                component={NavLink}
+                to={'/signin'}
+                startIcon={<ExitToApp />}
+                color='inherit'
+              >
+                Sign in
               </Button>
             )}
             <ThemeToggle />
