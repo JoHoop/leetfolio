@@ -82,6 +82,14 @@ export const Account = () => {
     setOpen(false);
   };
 
+  const resetError = () => {
+    setErrorMessage('');
+  };
+
+  const resetConfirm = () => {
+    setConfirmMessage('');
+  };
+
   const [imageAsFile, setImageAsFile] = useState('');
 
   const [values, handleChange] = UseForm({
@@ -203,24 +211,7 @@ export const Account = () => {
       </Button>
       <br />
       <br />
-      <Snackbar
-        open={confirmMessage}
-        autoHideDuration={6000}
-        onClose={setConfirmMessage('')}
-      >
-        <Alert onClose={setConfirmMessage('')} severity='success'>
-          {confirmMessage}
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={errorMessage}
-        autoHideDuration={6000}
-        onClose={setErrorMessage('')}
-      >
-        <Alert onClose={setErrorMessage('')} severity='error'>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
+
       <Divider />
       <Typography variant='h2'>Edit username or email</Typography>
       <label>Username</label>
@@ -335,7 +326,7 @@ export const Account = () => {
       <br />
       <br />
       <br />
-      <Button color='teal' disabled={!imageAsFile} onClick={handleFileUpload}>
+      <Button disabled={!imageAsFile} onClick={handleFileUpload}>
         Replace
       </Button>
       <Button disabled={!currentUser.photoURL} onClick={handleRemovePhoto}>
@@ -374,6 +365,24 @@ export const Account = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={confirmMessage !== ''}
+        autoHideDuration={6000}
+        onClose={resetConfirm}
+      >
+        <Alert onClose={resetConfirm} severity='success'>
+          {confirmMessage}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={errorMessage !== ''}
+        autoHideDuration={6000}
+        onClose={resetError}
+      >
+        <Alert onClose={resetError} severity='error'>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </React.Fragment>
   );
 };
