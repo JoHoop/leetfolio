@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router';
@@ -165,7 +165,7 @@ export const Header = ({ children }) => {
     noSsr: true,
   });
 
-  const [open, setOpen] = React.useState(isDesktop);
+  const [open, setOpen] = useState(isDesktop);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -188,7 +188,7 @@ export const Header = ({ children }) => {
     return <Redirect to='/signin' />;
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const profileOpen = Boolean(anchorEl);
 
   return (
@@ -334,7 +334,7 @@ export const Header = ({ children }) => {
                 </ListItemIcon>
                 <ListItemText primary={'Account'} />
               </ListItem>
-              <ListItem button key={'signout'}>
+              <ListItem button onClick={handleSignOut} key={'signout'}>
                 <ListItemIcon>
                   <ExitToApp />
                 </ListItemIcon>

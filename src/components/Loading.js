@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Backdrop, CircularProgress, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ export const Loading = () => {
 
 export const LoadingError = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const handleClose = () => {
     setOpen(false);
   };

@@ -4,7 +4,7 @@ import { ResumeContext } from '../components/Resume/ResumeProvider';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
-import { Clear, GetApp, Publish, Replay, Save, Send } from '@material-ui/icons';
+import { Clear, GetApp, Publish, Replay, Save } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
