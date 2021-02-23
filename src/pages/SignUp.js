@@ -55,7 +55,7 @@ export const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const showError = (error) => {
-    setErrorMessage(`${error.message} (Code: ${error.code})`);
+    setErrorMessage(error);
   };
 
   const resetError = () => {
@@ -67,11 +67,9 @@ export const SignUp = () => {
     try {
       await signUp(email, password);
       await changeUsername(username);
-      console.log('success');
       return <Redirect to='/account' />;
     } catch (error) {
-      console.log(error);
-      showError(error);
+      setErrorMessage(error.message);
     }
     setIsLoading(false);
   }, [email, password, username]);

@@ -48,7 +48,7 @@ export const Reset = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const showError = (error) => {
-    setErrorMessage(`${error.message} (Code: ${error.code})`);
+    setErrorMessage(error);
   };
 
   const resetError = () => {
@@ -59,10 +59,8 @@ export const Reset = () => {
     setIsLoading(true);
     try {
       await resetPassword(emailInput);
-      console.log('success');
     } catch (error) {
-      console.log(error);
-      showError(error);
+      setErrorMessage(error.message);
     }
     setIsLoading(false);
   }, [emailInput]);

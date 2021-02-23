@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { signIn } from '../services/Auth.js';
+import { signIn, signInWithGoogle } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../components/UseForm';
 import { isEmailValid } from '../services/Validators';
@@ -33,7 +33,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  submit: {
+  signInButton: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  googleButton: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
@@ -54,7 +57,7 @@ export const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const showError = (error) => {
-    setErrorMessage(`${error.message} (Code: ${error.code})`);
+    setErrorMessage(error);
   };
 
   const resetError = () => {
@@ -65,14 +68,24 @@ export const SignIn = () => {
     setIsLoading(true);
     try {
       await signIn(email, password);
-      console.log('success');
+
       return <Redirect to='/account' />;
     } catch (error) {
-      console.log(error);
-      showError(error);
+      setErrorMessage(error.message);
     }
     setIsLoading(false);
   }, [email, password]);
+
+  const handleSignInWithGoogle = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      await signInWithGoogle;
+      return <Redirect to='/account' />;
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+    setIsLoading(false);
+  }, []);
 
   const { currentUser } = useContext(UserContext);
 
@@ -127,7 +140,7 @@ export const SignIn = () => {
           fullWidth
           variant='contained'
           color='primary'
-          className={classes.submit}
+          className={classes.signInButton}
           disabled={!emailInputValid}
           onClick={() => handleSignIn()}
         >
@@ -145,6 +158,14 @@ export const SignIn = () => {
             </Link>
           </Grid>
         </Grid>
+        <Button
+          variant='contained'
+          color='secondary'
+          className={classes.googleButton}
+          onClick={() => handleSignInWithGoogle()}
+        >
+          Sign in with Google
+        </Button>
       </Box>
       {isLoading && <Loading />}
       <Snackbar
@@ -152,8 +173,8 @@ export const SignIn = () => {
         autoHideDuration={6000}
         onClose={resetError}
       >
-        <Alert onClose={resetError} severity='success'>
-          This is a success message!
+        <Alert onClose={resetError} severity='error'>
+          {errorMessage}
         </Alert>
       </Snackbar>
     </Container>
