@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { signOut } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider';
 import {
   Drawer,
@@ -181,6 +183,11 @@ export const Header = ({ children }) => {
     setAnchorEl(null);
   };
 
+  const handleSignOut = async () => {
+    signOut();
+    return <Redirect to='/signin' />;
+  };
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const profileOpen = Boolean(anchorEl);
 
@@ -240,7 +247,7 @@ export const Header = ({ children }) => {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>Settings</MenuItem>
-                  <MenuItem onClick={handleClose}>Sign out</MenuItem>
+                  <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
                 </Menu>
               </Box>
             ) : (
