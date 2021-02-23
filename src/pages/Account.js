@@ -204,56 +204,68 @@ export const Account = () => {
 
   return (
     <React.Fragment>
-      <Typography variant='h1'>Hello, {currentUser.displayName}!</Typography>
-      <p>Manage your account.</p>
-      <Button color='teal' onClick={handleSignOut}>
+      <Typography component='h1' variant='h2' color='textPrimary' gutterBottom>
+        Hello, {currentUser.displayName || currentUser.email.split('@')[0]}!
+      </Typography>
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Manage your account.
+      </Typography>
+      <Button
+        onClick={handleSignOut}
+        fullWidth
+        variant='contained'
+        color='primary'
+      >
         Sign out
       </Button>
       <br />
       <br />
-
       <Divider />
-      <Typography variant='h2'>Edit username or email</Typography>
-      <label>Username</label>
       <TextField
         id='outlined-basic'
         label='Username'
         value={username}
         onChange={handleChange}
         variant='outlined'
+        fullWidth
       />
       <Button
         disabled={username === currentUser.displayName}
         onClick={handleChangeUsername}
+        fullWidth
+        variant='contained'
+        color='primary'
       >
         Set
       </Button>
-      <label>Email</label>
       <TextField
         id='outlined-basic'
         label='Email'
         value={email}
         onChange={handleChange}
+        fullWidth
         variant='outlined'
       />
       <Button
         disabled={email === currentUser.email || !isEmailValid(email)}
         onClick={handleChangeEmail}
+        fullWidth
+        variant='contained'
+        color='primary'
       >
         Set
       </Button>
-      <label>ID</label>
       <TextField
         id='outlined-basic'
         label='ID'
         value={currentUser.uid}
         variant='outlined'
         disabled
+        fullWidth
       />
       <br />
       <Divider />
-      <Typography variant='h2'>Change password</Typography>
-      <label>Old password</label>
+
       <TextField
         variant='outlined'
         required
@@ -263,10 +275,9 @@ export const Account = () => {
         type='password'
         id='oldPassword'
         autoComplete='current-password'
-        value={password}
         onChange={handleChange}
       />
-      <label>New password</label>
+
       <TextField
         variant='outlined'
         required
@@ -282,17 +293,26 @@ export const Account = () => {
       <Button
         disabled={password !== '' && currentUser.password !== ''}
         onClick={handleChangePassword}
+        fullWidth
+        variant='contained'
+        color='primary'
       >
         Set
       </Button>
+      <br />
+      <Divider />
 
+      <Button
+        onClick={handleResetPassword}
+        fullWidth
+        variant='contained'
+        color='primary'
+      >
+        Reset by email
+      </Button>
       <br />
       <Divider />
-      <Typography variant='h2'>Reset password</Typography>
-      <Button onClick={handleResetPassword}>Reset by email</Button>
-      <br />
-      <Divider />
-      <Typography variant='h2'>Verify account</Typography>
+
       <FormControlLabel
         disabled
         control={
@@ -307,11 +327,18 @@ export const Account = () => {
       <br />
       <br />
       {!currentUser.emailVerified && (
-        <Button onClick={handleVerifyEmail}>Send verification email</Button>
+        <Button
+          onClick={handleVerifyEmail}
+          fullWidth
+          variant='contained'
+          color='primary'
+        >
+          Send verification email
+        </Button>
       )}
       <br />
       <Divider />
-      <Typography variant='h2'>Change avatar</Typography>
+
       <StyledBadge
         overlap='circle'
         anchorOrigin={{
@@ -326,16 +353,33 @@ export const Account = () => {
       <br />
       <br />
       <br />
-      <Button disabled={!imageAsFile} onClick={handleFileUpload}>
+      <Button
+        disabled={!imageAsFile}
+        onClick={handleFileUpload}
+        fullWidth
+        variant='contained'
+        color='primary'
+      >
         Replace
       </Button>
-      <Button disabled={!currentUser.photoURL} onClick={handleRemovePhoto}>
+      <Button
+        disabled={!currentUser.photoURL}
+        onClick={handleRemovePhoto}
+        fullWidth
+        variant='contained'
+        color='primary'
+      >
         Remove
       </Button>
       <br />
       <Divider />
-      <Typography variant='h2'>Delete account</Typography>
-      <Button variant='outlined' color='primary' onClick={handleClickOpen}>
+
+      <Button
+        onClick={handleClickOpen}
+        fullWidth
+        variant='contained'
+        color='primary'
+      >
         Delete account
       </Button>
       <Dialog
@@ -353,13 +397,21 @@ export const Account = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color='primary'>
+          <Button
+            autoFocus
+            onClick={handleClose}
+            fullWidth
+            variant='contained'
+            color='primary'
+          >
             Cancel
           </Button>
           <Button
             onClick={handleDeleteUser}
-            color='primary'
             disabled={confirmUsername !== currentUser.displayName}
+            fullWidth
+            variant='contained'
+            color='primary'
           >
             Delete
           </Button>
