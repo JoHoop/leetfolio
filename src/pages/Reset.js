@@ -125,8 +125,8 @@ export const Reset = () => {
         autoHideDuration={6000}
         onClose={resetError}
       >
-        <Alert onClose={resetError} severity='success'>
-          This is a success message!
+        <Alert onClose={resetError} severity='error'>
+          {errorMessage}
         </Alert>
       </Snackbar>
     </Container>
