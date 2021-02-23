@@ -1,4 +1,4 @@
-# [leetfolio.com](https://leetfolio.com)
+# [LeetFolio.com](https://leetfolio.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
