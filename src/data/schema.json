@@ -117,6 +117,11 @@
             "title": "Company",
             "description": "e.g. Facebook"
           },
+          "location": {
+            "type": "string",
+            "title": "Location",
+            "description": "e.g. Menlo Park, CA"
+          },
           "position": {
             "type": "string",
             "title": "Position",

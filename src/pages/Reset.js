@@ -32,10 +32,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -91,46 +87,43 @@ export const Reset = () => {
         <Typography component='h1' variant='h5'>
           Reset password
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='email'
-                label='Email'
-                name='email'
-                autoComplete='email'
-                value={emailInput}
-                onChange={(event) => setEmailInput(event.target.value)}
-              />
-            </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              variant='outlined'
+              required
+              fullWidth
+              id='email'
+              label='Email'
+              name='email'
+              autoComplete='email'
+              value={emailInput}
+              onChange={(event) => setEmailInput(event.target.value)}
+            />
           </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            disabled={!emailInputValid}
-            onClick={() => handleResetPassword()}
-          >
-            Sign in
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link component={NavLink} to={'/signin'} variant='body2'>
-                Sign in
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link component={NavLink} to={'/signup'} variant='body2'>
-                Don't have an account? Sign up
-              </Link>
-            </Grid>
+        </Grid>
+        <Button
+          fullWidth
+          variant='contained'
+          color='primary'
+          className={classes.submit}
+          disabled={!emailInputValid}
+          onClick={() => handleResetPassword()}
+        >
+          Sign in
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link component={NavLink} to={'/signin'} variant='body2'>
+              Sign in
+            </Link>
           </Grid>
-        </form>
+          <Grid item>
+            <Link component={NavLink} to={'/signup'} variant='body2'>
+              Don't have an account? Sign up
+            </Link>
+          </Grid>
+        </Grid>
       </Box>
       {isLoading && <Loading />}
       <Snackbar

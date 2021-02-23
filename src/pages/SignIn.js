@@ -33,10 +33,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -98,60 +94,57 @@ export const SignIn = () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='email'
-                label='Email'
-                name='email'
-                autoComplete='email'
-                value={email}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
-                value={password}
-                onChange={handleChange}
-              />
-            </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              variant='outlined'
+              required
+              fullWidth
+              id='email'
+              label='Email'
+              name='email'
+              autoComplete='email'
+              value={email}
+              onChange={handleChange}
+            />
           </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-            disabled={!emailInputValid}
-            onClick={() => handleSignIn()}
-          >
-            Sign in
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link component={NavLink} to={'/reset'} variant='body2'>
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link component={NavLink} to={'/signup'} variant='body2'>
-                Don't have an account? Sign up
-              </Link>
-            </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant='outlined'
+              required
+              fullWidth
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              autoComplete='current-password'
+              value={password}
+              onChange={handleChange}
+            />
           </Grid>
-        </form>
+        </Grid>
+        <Button
+          fullWidth
+          variant='contained'
+          color='primary'
+          className={classes.submit}
+          disabled={!emailInputValid}
+          onClick={() => handleSignIn()}
+        >
+          Sign in
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link component={NavLink} to={'/reset'} variant='body2'>
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link component={NavLink} to={'/signup'} variant='body2'>
+              Don't have an account? Sign up
+            </Link>
+          </Grid>
+        </Grid>
       </Box>
       {isLoading && <Loading />}
       <Snackbar
