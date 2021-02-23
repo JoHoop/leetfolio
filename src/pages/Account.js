@@ -30,7 +30,7 @@ import {
   resetPassword,
   verifyEmail,
 } from '../services/Auth.js';
-import { UseForm } from '../components/UseForm';
+import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
 import { createUploadTask } from '../services/FileHandler';
 
@@ -95,10 +95,11 @@ export const Account = () => {
   const [values, handleChange] = UseForm({
     username: currentUser.displayName,
     email: currentUser.email,
-    password: '',
+    oldPassword: '',
+    newPassword: '',
     confirmUsername: '',
   });
-  const { username, email, password, confirmUsername } = values;
+  const { username, email, oldPassword, newPassword, confirmUsername } = values;
 
   const handleImageAsFile = (event) => {
     const image = event.target.files[0];
@@ -162,7 +163,7 @@ export const Account = () => {
   };
   const handleChangePassword = async () => {
     try {
-      await changePassword(password);
+      await changePassword(newPassword);
       setConfirmMessage('Password has been set.');
     } catch (error) {
       setErrorMessage(error.message);
@@ -221,10 +222,12 @@ export const Account = () => {
       <br />
       <br />
       <Divider />
+      <br />
+      <br />
       <TextField
-        id='outlined-basic'
         label='Username'
         value={username}
+        name='username'
         onChange={handleChange}
         variant='outlined'
         fullWidth
@@ -239,9 +242,9 @@ export const Account = () => {
         Set
       </Button>
       <TextField
-        id='outlined-basic'
         label='Email'
         value={email}
+        name='email'
         onChange={handleChange}
         fullWidth
         variant='outlined'
@@ -256,7 +259,6 @@ export const Account = () => {
         Set
       </Button>
       <TextField
-        id='outlined-basic'
         label='ID'
         value={currentUser.uid}
         variant='outlined'
@@ -264,13 +266,14 @@ export const Account = () => {
         fullWidth
       />
       <br />
+      <br />
       <Divider />
-
+      <br />
+      <br />
       <TextField
         variant='outlined'
-        required
         fullWidth
-        name='password'
+        name='oldPassword'
         label='Old password'
         type='password'
         id='oldPassword'
@@ -280,18 +283,17 @@ export const Account = () => {
 
       <TextField
         variant='outlined'
-        required
         fullWidth
-        name='password'
+        name='newPassword'
         label='New password'
         type='password'
         id='newPassword'
         autoComplete='current-password'
-        value={password}
+        value={newPassword}
         onChange={handleChange}
       />
       <Button
-        disabled={password !== '' && currentUser.password !== ''}
+        disabled={newPassword === '' || oldPassword !== currentUser.password}
         onClick={handleChangePassword}
         fullWidth
         variant='contained'
@@ -299,8 +301,6 @@ export const Account = () => {
       >
         Set
       </Button>
-      <br />
-      <Divider />
 
       <Button
         onClick={handleResetPassword}
@@ -311,8 +311,10 @@ export const Account = () => {
         Reset by email
       </Button>
       <br />
+      <br />
       <Divider />
-
+      <br />
+      <br />
       <FormControlLabel
         disabled
         control={
@@ -324,8 +326,6 @@ export const Account = () => {
             : 'You are not yet verified'
         }
       />
-      <br />
-      <br />
       {!currentUser.emailVerified && (
         <Button
           onClick={handleVerifyEmail}
@@ -337,8 +337,10 @@ export const Account = () => {
         </Button>
       )}
       <br />
+      <br />
       <Divider />
-
+      <br />
+      <br />
       <StyledBadge
         overlap='circle'
         anchorOrigin={{
@@ -349,31 +351,35 @@ export const Account = () => {
       >
         <Avatar alt='Remy Sharp' src={currentUser.photoURL} />
       </StyledBadge>
-      <input type='file' accept='image/*' onChange={handleImageAsFile} />
+      {currentUser.photoURL ? (
+        <React.Fragment>
+          <Button
+            disabled={!imageAsFile}
+            onClick={handleFileUpload}
+            fullWidth
+            variant='contained'
+            color='primary'
+          >
+            Replace
+          </Button>
+          <Button
+            disabled={!currentUser.photoURL}
+            onClick={handleRemovePhoto}
+            fullWidth
+            variant='contained'
+            color='primary'
+          >
+            Remove
+          </Button>
+        </React.Fragment>
+      ) : (
+        <input type='file' accept='image/*' onChange={handleImageAsFile} />
+      )}
       <br />
-      <br />
-      <br />
-      <Button
-        disabled={!imageAsFile}
-        onClick={handleFileUpload}
-        fullWidth
-        variant='contained'
-        color='primary'
-      >
-        Replace
-      </Button>
-      <Button
-        disabled={!currentUser.photoURL}
-        onClick={handleRemovePhoto}
-        fullWidth
-        variant='contained'
-        color='primary'
-      >
-        Remove
-      </Button>
       <br />
       <Divider />
-
+      <br />
+      <br />
       <Button
         onClick={handleClickOpen}
         fullWidth
@@ -392,18 +398,20 @@ export const Account = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Do you really want to delete your user account? Type username to
-            confirm
+            Do you really want to delete your user account? Type your username
+            to confirm
           </DialogContentText>
+          <TextField
+            label='Username'
+            name='confirmUsername'
+            value={confirmUsername}
+            onChange={handleChange}
+            variant='outlined'
+            fullWidth
+          />
         </DialogContent>
         <DialogActions>
-          <Button
-            autoFocus
-            onClick={handleClose}
-            fullWidth
-            variant='contained'
-            color='primary'
-          >
+          <Button autoFocus onClick={handleClose} fullWidth variant='contained'>
             Cancel
           </Button>
           <Button
@@ -411,7 +419,7 @@ export const Account = () => {
             disabled={confirmUsername !== currentUser.displayName}
             fullWidth
             variant='contained'
-            color='primary'
+            color='secondary'
           >
             Delete
           </Button>

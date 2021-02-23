@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { signIn, signInWithGoogle } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
-import { UseForm } from '../components/UseForm';
+import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
 import {
