@@ -139,7 +139,7 @@ export const SignUp = () => {
           color='primary'
           className={classes.submit}
           disabled={!emailInputValid}
-          onClick={() => handleSignUp()}
+          onClick={handleSignUp}
         >
           Sign up
         </Button>

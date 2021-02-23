@@ -102,7 +102,7 @@ export const Reset = () => {
           color='primary'
           className={classes.submit}
           disabled={!emailInputValid}
-          onClick={() => handleResetPassword()}
+          onClick={handleResetPassword}
         >
           Sign in
         </Button>

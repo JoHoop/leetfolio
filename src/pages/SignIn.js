@@ -138,7 +138,7 @@ export const SignIn = () => {
           color='primary'
           className={classes.signInButton}
           disabled={!emailInputValid}
-          onClick={() => handleSignIn()}
+          onClick={handleSignIn}
         >
           Sign in
         </Button>
@@ -158,7 +158,7 @@ export const SignIn = () => {
           variant='contained'
           color='secondary'
           className={classes.googleButton}
-          onClick={() => handleSignInWithGoogle()}
+          onClick={handleSignInWithGoogle}
         >
           Sign in with Google
         </Button>
