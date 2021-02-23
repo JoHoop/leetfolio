@@ -47,10 +47,6 @@ export const Reset = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const showError = (error) => {
-    setErrorMessage(error);
-  };
-
   const resetError = () => {
     setErrorMessage('');
   };
