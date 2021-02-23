@@ -6,7 +6,7 @@ export const Education = ({ education }) => {
     const { area, institution, startDate, endDate, studyType } = education;
 
     return (
-      <li>
+      <li key={startDate}>
         <h3>
           {area} @ {institution}
         </h3>

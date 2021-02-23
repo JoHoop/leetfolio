@@ -13,7 +13,7 @@ export const Experience = ({ work }) => {
     } = experience;
 
     return (
-      <li>
+      <li key={startDate}>
         <h3>
           {position}
           {' @ '}

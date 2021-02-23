@@ -9,12 +9,12 @@ export const Details = ({ basics }) => {
       <h2>Details</h2>
       <Box className={'wrapper'}>
         <ul>
-          <li>{birthday}</li>
-          <li>{location.address}</li>
-          <li>{location.postalCode}</li>
-          <li>{location.region}</li>
-          <li>{phone}</li>
-          <li>
+          <li key={'birthday'}>{birthday}</li>
+          <li key={'address'}>{location.address}</li>
+          <li key={'postalCode'}>{location.postalCode}</li>
+          <li key={'region'}>{location.region}</li>
+          <li key={'phone'}>{phone}</li>
+          <li key={'email'}>
             <a href={`mailto:${email}`}>{email}</a>
           </li>
         </ul>

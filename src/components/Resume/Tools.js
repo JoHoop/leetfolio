@@ -7,7 +7,7 @@ export const Tools = () => {
       <h2>Tools</h2>
       <Box className={'wrapper'}>
         <ul>
-          <li>
+          <li key={'photoshop'}>
             <p>Adobe Photoshop</p>
             <Box className={'skillbar'}>
               <Box className={'fill'} style={{ width: '95%' }}></Box>
@@ -15,7 +15,7 @@ export const Tools = () => {
           </li>
         </ul>
         <ul>
-          <li>
+          <li key={'illustrator'}>
             <p>Adobe Illustrator</p>
             <Box className={'skillbar'}>
               <Box className={'fill'} style={{ width: '85%' }}></Box>
@@ -23,7 +23,7 @@ export const Tools = () => {
           </li>
         </ul>
         <ul>
-          <li>
+          <li key={'aftereffects'}>
             <p>Adobe After Effects</p>
             <Box className={'skillbar'}>
               <Box className={'fill'} style={{ width: '55%' }}></Box>

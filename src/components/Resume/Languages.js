@@ -6,8 +6,8 @@ export const Languages = ({ languages }) => {
     const { language, fluency } = item;
 
     return (
-      <ul>
-        <li>
+      <ul key={language}>
+        <li key={language}>
           <h3>{language}</h3>
           <p>{fluency}</p>
         </li>
