@@ -70,11 +70,11 @@ export const App = () => {
                     <Suspense fallback={<Loading />}>
                       <Switch>
                         <Route path='/' exact component={Home} />
-                        <Route path='/editor' component={Editor} />
-                        <Route path='/resume' component={Resume} />
                         <Route path='/signin' component={SignIn} />
                         <Route path='/signup' component={SignUp} />
                         <Route path='/reset' component={Reset} />
+                        <PrivateRoute path='/editor' component={Editor} />
+                        <PrivateRoute path='/resume' component={Resume} />
                         <PrivateRoute path='/account' component={Account} />
                         <Route path='*' component={PageNotFound} />
                       </Switch>
