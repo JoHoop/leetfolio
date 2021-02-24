@@ -39,10 +39,22 @@ export const resetPassword = (email) => {
   return Firebase.auth().sendPasswordResetEmail(email);
 };
 
+export const uploadPhoto = (userID, file) => {
+  return Firebase.storage()
+    .ref()
+    .child(`userPhotos/${userID}${file.name}`)
+    .put(file);
+};
+
 export const changePhoto = (url) => {
   return Firebase.auth().currentUser.updateProfile({
     photoURL: url,
   });
+};
+
+export const deletePhoto = (url) => {
+  if (!url) return;
+  return Firebase.storage().refFromURL(url).delete();
 };
 
 export const deleteUser = () => {

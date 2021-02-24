@@ -26,13 +26,14 @@ import {
   changeEmail,
   changePassword,
   changePhoto,
+  uploadPhoto,
+  deletePhoto,
   deleteUser,
   resetPassword,
   verifyEmail,
 } from '../services/Auth.js';
 import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
-import { createUploadTask } from '../services/FileHandler';
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
@@ -101,7 +102,7 @@ export const Account = () => {
 
   const handleFileUpload = ({ target }) => {
     if (!target.files[0]) return;
-    var uploadTask = createUploadTask(currentUser.uid, target.files[0]);
+    var uploadTask = uploadPhoto(currentUser.uid, target.files[0]);
 
     uploadTask.on(
       Firebase.storage.TaskEvent.STATE_CHANGED,
@@ -125,6 +126,7 @@ export const Account = () => {
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(async (downloadURL) => {
           try {
+            await deletePhoto(currentUser.photoURL);
             await changePhoto(downloadURL);
             setConfirmMessage('Avatar has been set.');
           } catch (error) {
@@ -165,6 +167,7 @@ export const Account = () => {
   };
   const handleRemovePhoto = async () => {
     try {
+      await deletePhoto(currentUser.photoURL);
       await changePhoto('');
       setConfirmMessage('Avatar has been removed.');
     } catch (error) {
@@ -384,7 +387,7 @@ export const Account = () => {
         onClick={handleClickOpen}
         fullWidth
         variant='contained'
-        color='primary'
+        color='secondary'
       >
         Delete account
       </Button>
