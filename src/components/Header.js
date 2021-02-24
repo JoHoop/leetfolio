@@ -24,6 +24,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListItemAvatar,
   makeStyles,
   useTheme,
   Link,
@@ -119,6 +120,13 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(2, 2),
     marginTop: 'auto',
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 2),
+    ...theme.mixins.toolbar,
   },
 }));
 
@@ -303,6 +311,22 @@ export const Header = ({ children }) => {
         }}
       >
         <div className={classes.drawerHeader}>
+          {currentUser && (
+            <List>
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar src={currentUser.photoURL} alt='Avatar' />
+                </ListItemAvatar>
+                <ListItemText
+                  style={{
+                    marginLeft: 7,
+                  }}
+                  primary={currentUser.displayName}
+                  secondary={currentUser.email}
+                />
+              </ListItem>
+            </List>
+          )}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />

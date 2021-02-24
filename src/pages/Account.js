@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grid,
   CircularProgress,
   Checkbox,
   TextField,
@@ -206,12 +207,7 @@ export const Account = () => {
       <Typography variant='h5' color='textSecondary' paragraph>
         Manage your account.
       </Typography>
-      <Button
-        onClick={handleSignOut}
-        fullWidth
-        variant='contained'
-        color='primary'
-      >
+      <Button onClick={handleSignOut} variant='contained' color='primary'>
         Sign out
       </Button>
       <br />
@@ -219,40 +215,54 @@ export const Account = () => {
       <Divider />
       <br />
       <br />
-      <TextField
-        label='Username'
-        value={username}
-        name='username'
-        onChange={handleChange}
-        variant='outlined'
-        fullWidth
-      />
-      <Button
-        disabled={username === currentUser.displayName}
-        onClick={handleChangeUsername}
-        fullWidth
-        variant='contained'
-        color='primary'
-      >
-        Set
-      </Button>
-      <TextField
-        label='Email'
-        value={email}
-        name='email'
-        onChange={handleChange}
-        fullWidth
-        variant='outlined'
-      />
-      <Button
-        disabled={email === currentUser.email || !isEmailValid(email)}
-        onClick={handleChangeEmail}
-        fullWidth
-        variant='contained'
-        color='primary'
-      >
-        Set
-      </Button>
+      <Grid container spacing={0}>
+        <Grid item xs={12}>
+          <TextField
+            label='Username'
+            value={username}
+            name='username'
+            onChange={handleChange}
+            variant='outlined'
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            disabled={username === currentUser.displayName}
+            onClick={handleChangeUsername}
+            fullWidth
+            variant='contained'
+            color='primary'
+          >
+            Set
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={0}>
+        <Grid item xs={12}>
+          <TextField
+            label='Email'
+            value={email}
+            name='email'
+            onChange={handleChange}
+            fullWidth
+            variant='outlined'
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            disabled={email === currentUser.email || !isEmailValid(email)}
+            onClick={handleChangeEmail}
+            fullWidth
+            variant='contained'
+            color='primary'
+          >
+            Set
+          </Button>
+        </Grid>
+      </Grid>
+
       <TextField
         label='ID'
         value={currentUser.uid}
