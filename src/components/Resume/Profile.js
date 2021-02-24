@@ -1,15 +1,15 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
 import { SectionHeader } from './fragments/SectionHeader';
+import { Spacing } from './fragments/Spacing';
+import { Line } from './fragments/Line';
 
 export const Profile = ({ basics }) => {
-  const summary = basics.summary;
   return (
-    <section id='profile'>
+    <Spacing>
       <SectionHeader>Profile</SectionHeader>
-      <Box className={'wrapper'}>
-        <p>{summary}</p>
-      </Box>
-    </section>
+      <Line>
+        <p>{basics.summary}</p>
+      </Line>
+    </Spacing>
   );
 };

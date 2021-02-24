@@ -1,25 +1,38 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from './fragments/SectionHeader';
+import { Spacing } from './fragments/Spacing';
+
+const useStyles = makeStyles((theme) => ({
+  language: {
+    fontWeight: 600,
+  },
+  level: {
+    color: '#858585',
+    padding: 0,
+    margin: 0,
+  },
+}));
 
 export const Languages = ({ languages }) => {
+  const classes = useStyles();
+
   const items = languages.map((item) => {
     const { language, fluency } = item;
-
     return (
-      <ul key={language}>
-        <li key={language}>
-          <h3>{language}</h3>
-          <p>{fluency}</p>
-        </li>
-      </ul>
+      <Spacing small>
+        <dl>
+          <dt className={classes.language}>{language}</dt>
+          <dd className={classes.level}>{fluency}</dd>
+        </dl>
+      </Spacing>
     );
   });
 
   return (
-    <section>
+    <Spacing>
       <SectionHeader>Languages</SectionHeader>
-      <Box className={'wrapper'}>{items}</Box>
-    </section>
+      {items}
+    </Spacing>
   );
 };

@@ -1,8 +1,28 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Spacing } from './fragments/Spacing';
 import { SectionHeader } from './fragments/SectionHeader';
+import { Line } from './fragments/Line';
+
+const useStyles = makeStyles((theme) => ({
+  experienceTitle: {
+    margin: 0,
+    padding: 0,
+    fontSize: '1em',
+    fontWeight: 600,
+  },
+  experienceDate: {
+    margin: 0,
+    color: '#329cb9',
+  },
+  experienceParagraph: {
+    margin: 0,
+  },
+}));
 
 export const Experience = ({ work }) => {
+  const classes = useStyles();
+
   const items = work.map((experience) => {
     const {
       company,
@@ -12,30 +32,27 @@ export const Experience = ({ work }) => {
       endDate,
       summary,
     } = experience;
-
     return (
-      <li key={startDate}>
-        <h3>
+      <Spacing small>
+        <h3 className={classes.experienceTitle}>
           {position}
           {' @ '}
           <a target={'_blank'} rel={'noreferrer'} href={website}>
             {company}
           </a>
         </h3>
-        <span>
+        <p className={classes.experienceDate}>
           {startDate} - {endDate}
-        </span>
-        <p>{summary}</p>
-      </li>
+        </p>
+        <p className={classes.experienceParagraph}>{summary}</p>
+      </Spacing>
     );
   });
 
   return (
-    <section className={'lists'} id='experience'>
+    <Spacing>
       <SectionHeader>Experience</SectionHeader>
-      <Box className={'wrapper'}>
-        <ul>{items}</ul>
-      </Box>
-    </section>
+      <Line>{items}</Line>
+    </Spacing>
   );
 };

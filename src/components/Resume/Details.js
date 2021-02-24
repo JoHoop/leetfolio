@@ -1,14 +1,15 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import { SectionHeader } from './fragments/SectionHeader';
+import { Spacing } from './fragments/Spacing';
 
 export const Details = ({ basics }) => {
   const { birthday, location, phone, email } = basics;
 
   return (
-    <section id='details'>
+    <Spacing>
       <SectionHeader>Details</SectionHeader>
-      <Box className={'wrapper'}>
+      <Spacing small>
         <ul>
           <li key={'birthday'}>{birthday}</li>
           <li key={'address'}>{location.address}</li>
@@ -19,7 +20,7 @@ export const Details = ({ basics }) => {
             <a href={`mailto:${email}`}>{email}</a>
           </li>
         </ul>
-      </Box>
-    </section>
+      </Spacing>
+    </Spacing>
   );
 };
