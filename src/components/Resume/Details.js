@@ -1,12 +1,13 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
+import { SectionHeader } from './fragments/SectionHeader';
 
 export const Details = ({ basics }) => {
   const { birthday, location, phone, email } = basics;
 
   return (
     <section id='details'>
-      <h2>Details</h2>
+      <SectionHeader>Details</SectionHeader>
       <Box className={'wrapper'}>
         <ul>
           <li key={'birthday'}>{birthday}</li>

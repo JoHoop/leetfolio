@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
+import { SectionHeader } from './fragments/SectionHeader';
 
 export const Education = ({ education }) => {
   const items = education.map((education) => {
@@ -20,7 +21,7 @@ export const Education = ({ education }) => {
 
   return (
     <section className={'lists'} id='education'>
-      <h2>Education</h2>
+      <SectionHeader>Education</SectionHeader>
       <Box className={'wrapper'}>
         <ul>{items}</ul>
       </Box>

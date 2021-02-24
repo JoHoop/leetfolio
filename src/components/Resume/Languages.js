@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
+import { SectionHeader } from './fragments/SectionHeader';
 
 export const Languages = ({ languages }) => {
   const items = languages.map((item) => {
@@ -17,7 +18,7 @@ export const Languages = ({ languages }) => {
 
   return (
     <section>
-      <h2>Languages</h2>
+      <SectionHeader>Languages</SectionHeader>
       <Box className={'wrapper'}>{items}</Box>
     </section>
   );

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
+import { SectionHeader } from './fragments/SectionHeader';
 
 export const Tools = () => {
   return (
     <section>
-      <h2>Tools</h2>
+      <SectionHeader>Tools</SectionHeader>
       <Box className={'wrapper'}>
         <ul>
           <li key={'photoshop'}>
