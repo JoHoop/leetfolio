@@ -240,6 +240,7 @@ export const Header = ({ children }) => {
                     <Avatar
                       src={currentUser.photoURL}
                       className={classes.avatar}
+                      alt='Avatar'
                     />
                   </IconButton>
                 </Tooltip>
