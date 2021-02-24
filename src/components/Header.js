@@ -337,19 +337,38 @@ export const Header = ({ children }) => {
         </div>
         <Divider />
         <List>
-          <ListItem button key={'home'} component={NavLink} to={'/'}>
+          <ListItem
+            button
+            key={'home'}
+            component={NavLink}
+            to={'/'}
+            exact
+            activeClassName='Mui-selected'
+          >
             <ListItemIcon>
               <Home />
             </ListItemIcon>
             <ListItemText primary={'Home'} />
           </ListItem>
-          <ListItem button key={'editor'} component={NavLink} to={'/editor'}>
+          <ListItem
+            button
+            key={'editor'}
+            component={NavLink}
+            to={'/editor'}
+            activeClassName='Mui-selected'
+          >
             <ListItemIcon>
               <ListAlt />
             </ListItemIcon>
             <ListItemText primary={'Editor'} />
           </ListItem>
-          <ListItem button key={'resume'} component={NavLink} to={'/resume'}>
+          <ListItem
+            button
+            key={'resume'}
+            component={NavLink}
+            to={'/resume'}
+            activeClassName='Mui-selected'
+          >
             <ListItemIcon>
               <Description />
             </ListItemIcon>
@@ -365,13 +384,19 @@ export const Header = ({ children }) => {
                 to={'/account'}
                 button
                 key={'account'}
+                activeClassName='Mui-selected'
               >
                 <ListItemIcon>
                   <AccountBox />
                 </ListItemIcon>
                 <ListItemText primary={'Account'} />
               </ListItem>
-              <ListItem button onClick={handleSignOut} key={'signout'}>
+              <ListItem
+                button
+                onClick={handleSignOut}
+                key={'signout'}
+                activeClassName='Mui-selected'
+              >
                 <ListItemIcon>
                   <ExitToApp />
                 </ListItemIcon>
@@ -379,7 +404,13 @@ export const Header = ({ children }) => {
               </ListItem>
             </React.Fragment>
           ) : (
-            <ListItem component={NavLink} to={'/signin'} button key={'signin'}>
+            <ListItem
+              component={NavLink}
+              to={'/signin'}
+              button
+              key={'signin'}
+              activeClassName='Mui-selected'
+            >
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
