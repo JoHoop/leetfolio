@@ -231,56 +231,6 @@ export const Header = ({ children }) => {
                 LeetFolio
               </Link>
             </Typography>
-            {currentUser ? (
-              <Box>
-                <Tooltip
-                  title={'Account'}
-                  placement='bottom'
-                  TransitionComponent={Zoom}
-                >
-                  <IconButton
-                    aria-label='account of current user'
-                    aria-controls='menu-appbar'
-                    aria-haspopup='true'
-                    onClick={handleMenu}
-                    color='inherit'
-                  >
-                    <Avatar
-                      src={currentUser.photoURL}
-                      className={classes.avatar}
-                      alt='Avatar'
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  id='menu-appbar'
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={profileOpen}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Settings</MenuItem>
-                  <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
-                </Menu>
-              </Box>
-            ) : (
-              <Button
-                component={NavLink}
-                to={'/signin'}
-                startIcon={<ExitToApp />}
-                color='inherit'
-              >
-                Sign in
-              </Button>
-            )}
             <ThemeToggle />
             <Tooltip
               title={'GitHub repo'}
