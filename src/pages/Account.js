@@ -11,8 +11,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  CircularProgress,
   Checkbox,
-  LinearProgress,
   TextField,
   FormControlLabel,
   makeStyles,
@@ -43,6 +43,17 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  fabProgress: {
+    color: 'primary',
+    position: 'absolute',
+    top: -3,
+    left: -1,
+    zIndex: 1,
   },
 }));
 
@@ -112,13 +123,14 @@ export const Account = () => {
           try {
             await deletePhoto(currentUser.photoURL);
             await changePhoto(downloadURL);
+            setUploadProgress(undefined);
             setConfirmMessage('Avatar has been set.');
           } catch (error) {
+            setUploadProgress(undefined);
             setErrorMessage(error.message);
           }
         });
-      },
-      setUploadProgress(undefined)
+      }
     );
   };
 
@@ -323,16 +335,16 @@ export const Account = () => {
       <Divider />
       <br />
       <br />
-
-      <Avatar
-        src={currentUser.photoURL}
-        className={classes.avatar}
-        alt='Avatar'
-      />
-
-      {uploadProgress && (
-        <LinearProgress variant='determinate' value={uploadProgress} />
-      )}
+      <div className={classes.wrapper}>
+        <Avatar
+          src={currentUser.photoURL}
+          className={classes.avatar}
+          alt='Avatar'
+        />
+        {uploadProgress && (
+          <CircularProgress size={123} className={classes.fabProgress} />
+        )}
+      </div>
 
       <br />
 
