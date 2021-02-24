@@ -12,6 +12,7 @@ import {
   DialogContentText,
   DialogTitle,
   Checkbox,
+  LinearProgress,
   TextField,
   FormControlLabel,
   makeStyles,
@@ -70,6 +71,8 @@ export const Account = () => {
     setConfirmMessage('');
   };
 
+  const [uploadProgress, setUploadProgress] = useState(undefined);
+
   const [values, handleChange] = UseForm({
     username: currentUser.displayName,
     email: currentUser.email,
@@ -86,7 +89,9 @@ export const Account = () => {
     uploadTask.on(
       Firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
+        setUploadProgress(0);
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
         console.log(`Upload is ${progress} % done`);
         switch (snapshot.state) {
           case Firebase.storage.TaskState.PAUSED:
@@ -112,7 +117,8 @@ export const Account = () => {
             setErrorMessage(error.message);
           }
         });
-      }
+      },
+      setUploadProgress(undefined)
     );
   };
 
@@ -319,10 +325,16 @@ export const Account = () => {
       <br />
 
       <Avatar
-        alt='Remy Sharp'
         src={currentUser.photoURL}
         className={classes.avatar}
+        alt='Avatar'
       />
+
+      {uploadProgress && (
+        <LinearProgress variant='determinate' value={uploadProgress} />
+      )}
+
+      <br />
 
       <React.Fragment>
         <input
