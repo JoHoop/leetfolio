@@ -90,8 +90,6 @@ export const Account = () => {
     setConfirmMessage('');
   };
 
-  const [imageAsFile, setImageAsFile] = useState('');
-
   const [values, handleChange] = UseForm({
     username: currentUser.displayName,
     email: currentUser.email,
@@ -101,13 +99,9 @@ export const Account = () => {
   });
   const { username, email, oldPassword, newPassword, confirmUsername } = values;
 
-  const handleImageAsFile = (event) => {
-    const image = event.target.files[0];
-    setImageAsFile((imageFile) => image);
-  };
-
-  const handleFileUpload = () => {
-    var uploadTask = createUploadTask(currentUser.uid, imageAsFile);
+  const handleFileUpload = ({ target }) => {
+    if (!target.files[0]) return;
+    var uploadTask = createUploadTask(currentUser.uid, target.files[0]);
 
     uploadTask.on(
       Firebase.storage.TaskEvent.STATE_CHANGED,
@@ -351,30 +345,36 @@ export const Account = () => {
       >
         <Avatar alt='Remy Sharp' src={currentUser.photoURL} />
       </StyledBadge>
-      {currentUser.photoURL ? (
-        <React.Fragment>
+
+      <React.Fragment>
+        <input
+          type='file'
+          accept='image/*'
+          id='contained-button-file'
+          onChange={handleFileUpload}
+          hidden
+        />
+        <label htmlFor='contained-button-file'>
           <Button
-            disabled={!imageAsFile}
-            onClick={handleFileUpload}
             fullWidth
             variant='contained'
+            component='span'
             color='primary'
           >
-            Replace
+            Upload
           </Button>
-          <Button
-            disabled={!currentUser.photoURL}
-            onClick={handleRemovePhoto}
-            fullWidth
-            variant='contained'
-            color='primary'
-          >
-            Remove
-          </Button>
-        </React.Fragment>
-      ) : (
-        <input type='file' accept='image/*' onChange={handleImageAsFile} />
-      )}
+        </label>
+        <Button
+          disabled={!currentUser.photoURL}
+          onClick={handleRemovePhoto}
+          fullWidth
+          variant='contained'
+          color='primary'
+        >
+          Remove
+        </Button>
+      </React.Fragment>
+
       <br />
       <br />
       <Divider />
