@@ -93,7 +93,7 @@ export const Account = () => {
   });
   const { username, email, oldPassword, newPassword, confirmUsername } = values;
 
-  const handleFileUpload = ({ target }) => {
+  const handleUploadPhoto = ({ target }) => {
     setUploading(true);
     if (!target.files[0]) return;
     var uploadTask = uploadPhoto(currentUser.uid, target.files[0]);
@@ -354,7 +354,7 @@ export const Account = () => {
           type='file'
           accept='image/*'
           id='contained-button-file'
-          onChange={handleFileUpload}
+          onChange={handleUploadPhoto}
           hidden
         />
         <label htmlFor='contained-button-file'>

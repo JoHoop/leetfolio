@@ -65,9 +65,6 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
     color: #329CB9;
-    &:hover {
-        text-decoration: underline;
-    }
   }
 
   p, li {
