@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router';
 import {
   Avatar,
-  Badge,
   Snackbar,
   Button,
   Typography,
@@ -15,7 +14,7 @@ import {
   Checkbox,
   TextField,
   FormControlLabel,
-  withStyles,
+  makeStyles,
 } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import Firebase from '../services/Firebase';
@@ -39,36 +38,16 @@ const Alert = (props) => {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
 };
 
-const StyledBadge = withStyles((theme) => ({
-  badge: {
-    backgroundColor: '#44b700',
-    color: '#44b700',
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    '&::after': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      borderRadius: '50%',
-      animation: '$ripple 1.2s infinite ease-in-out',
-      border: '1px solid currentColor',
-      content: '""',
-    },
+const useStyles = makeStyles((theme) => ({
+  avatar: {
+    width: theme.spacing(15),
+    height: theme.spacing(15),
   },
-  '@keyframes ripple': {
-    '0%': {
-      transform: 'scale(.8)',
-      opacity: 1,
-    },
-    '100%': {
-      transform: 'scale(2.4)',
-      opacity: 0,
-    },
-  },
-}))(Badge);
+}));
 
 export const Account = () => {
+  const classes = useStyles();
+
   const { currentUser } = useContext(UserContext);
   const [confirmMessage, setConfirmMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -338,16 +317,12 @@ export const Account = () => {
       <Divider />
       <br />
       <br />
-      <StyledBadge
-        overlap='circle'
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        variant='dot'
-      >
-        <Avatar alt='Remy Sharp' src={currentUser.photoURL} />
-      </StyledBadge>
+
+      <Avatar
+        alt='Remy Sharp'
+        src={currentUser.photoURL}
+        className={classes.avatar}
+      />
 
       <React.Fragment>
         <input
