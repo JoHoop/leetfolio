@@ -388,43 +388,45 @@ export const Account = () => {
       >
         Delete account
       </Button>
+
       <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby='draggable-dialog-title'
+        aria-labelledby='form-dialog-title'
       >
-        <DialogTitle style={{ cursor: 'move' }} id='draggable-dialog-title'>
-          Subscribe
-        </DialogTitle>
+        <DialogTitle id='form-dialog-title'>Delete account</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Do you really want to delete your user account? Type your username
-            to confirm
+            Do you really want to delete your user account? <br /> Type your
+            username to confirm
           </DialogContentText>
           <TextField
+            autoFocus
+            fullWidth
+            margin='dense'
+            id='name'
             label='Username'
             name='confirmUsername'
             value={confirmUsername}
             onChange={handleChange}
             variant='outlined'
-            fullWidth
           />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} fullWidth variant='contained'>
+          <Button onClick={handleClose} color='primary' variant='contained'>
             Cancel
           </Button>
           <Button
             onClick={handleDeleteUser}
             disabled={confirmUsername !== currentUser.displayName}
-            fullWidth
-            variant='contained'
             color='secondary'
+            variant='contained'
           >
             Delete
           </Button>
         </DialogActions>
       </Dialog>
+
       <Snackbar
         open={confirmMessage !== ''}
         autoHideDuration={6000}
