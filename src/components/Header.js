@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: 'inherit',
   },
   appBar: {
     backgroundColor: theme.palette.background,
@@ -212,7 +213,9 @@ export const Header = ({ children }) => {
               <MenuIcon />
             </IconButton>
             <Typography variant='h6' className={classes.title} noWrap>
-              LeetFolio
+              <Link color='inherit' component={NavLink} to='/' underline='none'>
+                LeetFolio
+              </Link>
             </Typography>
             {currentUser ? (
               <Box>
