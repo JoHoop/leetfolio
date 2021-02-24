@@ -207,7 +207,7 @@ export const Account = () => {
       <Typography variant='h5' color='textSecondary' paragraph>
         Manage your account.
       </Typography>
-      <Button onClick={handleSignOut} variant='contained' color='primary'>
+      <Button onClick={handleSignOut} variant='outlined' color='primary'>
         Sign out
       </Button>
       <br />
@@ -231,7 +231,7 @@ export const Account = () => {
             disabled={username === currentUser.displayName}
             onClick={handleChangeUsername}
             fullWidth
-            variant='contained'
+            variant='outlined'
             color='primary'
           >
             Set
@@ -255,7 +255,7 @@ export const Account = () => {
             disabled={email === currentUser.email || !isEmailValid(email)}
             onClick={handleChangeEmail}
             fullWidth
-            variant='contained'
+            variant='outlined'
             color='primary'
           >
             Set
@@ -301,7 +301,7 @@ export const Account = () => {
         disabled={newPassword === '' || oldPassword !== currentUser.password}
         onClick={handleChangePassword}
         fullWidth
-        variant='contained'
+        variant='outlined'
         color='primary'
       >
         Set
@@ -310,7 +310,7 @@ export const Account = () => {
       <Button
         onClick={handleResetPassword}
         fullWidth
-        variant='contained'
+        variant='outlined'
         color='primary'
       >
         Reset by email
@@ -335,7 +335,7 @@ export const Account = () => {
         <Button
           onClick={handleVerifyEmail}
           fullWidth
-          variant='contained'
+          variant='outlined'
           color='primary'
         >
           Send verification email
@@ -368,12 +368,7 @@ export const Account = () => {
           hidden
         />
         <label htmlFor='contained-button-file'>
-          <Button
-            fullWidth
-            variant='contained'
-            component='span'
-            color='primary'
-          >
+          <Button fullWidth variant='outlined' component='span' color='primary'>
             Upload
           </Button>
         </label>
@@ -381,7 +376,7 @@ export const Account = () => {
           disabled={!currentUser.photoURL}
           onClick={handleRemovePhoto}
           fullWidth
-          variant='contained'
+          variant='outlined'
           color='primary'
         >
           Remove
@@ -396,7 +391,7 @@ export const Account = () => {
       <Button
         onClick={handleClickOpen}
         fullWidth
-        variant='contained'
+        variant='outlined'
         color='secondary'
       >
         Delete account
@@ -426,14 +421,14 @@ export const Account = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color='primary' variant='contained'>
+          <Button onClick={handleClose} color='primary' variant='outlined'>
             Cancel
           </Button>
           <Button
             onClick={handleDeleteUser}
             disabled={confirmUsername !== currentUser.displayName}
             color='secondary'
-            variant='contained'
+            variant='outlined'
           >
             Delete
           </Button>

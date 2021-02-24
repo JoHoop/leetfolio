@@ -134,7 +134,7 @@ export const SignIn = () => {
         </Grid>
         <Button
           fullWidth
-          variant='contained'
+          variant='outlined'
           color='primary'
           className={classes.signInButton}
           disabled={!emailInputValid}
@@ -155,7 +155,7 @@ export const SignIn = () => {
           </Grid>
         </Grid>
         <Button
-          variant='contained'
+          variant='outlined'
           color='secondary'
           className={classes.googleButton}
           onClick={handleSignInWithGoogle}

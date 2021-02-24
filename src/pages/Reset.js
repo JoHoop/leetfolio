@@ -98,7 +98,7 @@ export const Reset = () => {
         </Grid>
         <Button
           fullWidth
-          variant='contained'
+          variant='outlined'
           color='primary'
           className={classes.submit}
           disabled={!emailInputValid}

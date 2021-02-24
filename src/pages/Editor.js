@@ -54,12 +54,12 @@ export const Editor = () => {
           hidden
         />
         <label htmlFor='contained-button-file'>
-          <Button variant='contained' startIcon={<Publish />} component='span'>
+          <Button variant='outlined' startIcon={<Publish />} component='span'>
             Upload
           </Button>
         </label>
         <Button
-          variant='contained'
+          variant='outlined'
           startIcon={<GetApp />}
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(resume)
@@ -68,10 +68,10 @@ export const Editor = () => {
         >
           Download
         </Button>
-        <Button variant='contained' startIcon={<Replay />} onClick={setDefault}>
+        <Button variant='outlined' startIcon={<Replay />} onClick={setDefault}>
           Default
         </Button>
-        <Button variant='contained' startIcon={<Clear />} onClick={setEmpty}>
+        <Button variant='outlined' startIcon={<Clear />} onClick={setEmpty}>
           Reset
         </Button>
       </Box>
@@ -86,7 +86,7 @@ export const Editor = () => {
         autoComplete='on'
         liveValidate
       >
-        <Button variant='contained' startIcon={<Save />} type='submit'>
+        <Button variant='outlined' startIcon={<Save />} type='submit'>
           Submit
         </Button>
       </Form>
