@@ -82,7 +82,7 @@ export const Account = () => {
     setConfirmMessage('');
   };
 
-  const [uploadProgress, setUploadProgress] = useState(undefined);
+  const [uploading, setUploading] = useState(undefined);
 
   const [values, handleChange] = UseForm({
     username: currentUser.displayName,
@@ -94,15 +94,14 @@ export const Account = () => {
   const { username, email, oldPassword, newPassword, confirmUsername } = values;
 
   const handleFileUpload = ({ target }) => {
+    setUploading(true);
     if (!target.files[0]) return;
     var uploadTask = uploadPhoto(currentUser.uid, target.files[0]);
 
     uploadTask.on(
       Firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        setUploadProgress(0);
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadProgress(progress);
         console.log(`Upload is ${progress} % done`);
         switch (snapshot.state) {
           case Firebase.storage.TaskState.PAUSED:
@@ -123,10 +122,10 @@ export const Account = () => {
           try {
             await deletePhoto(currentUser.photoURL);
             await changePhoto(downloadURL);
-            setUploadProgress(undefined);
+            setUploading(false);
             setConfirmMessage('Avatar has been set.');
           } catch (error) {
-            setUploadProgress(undefined);
+            setUploading(false);
             setErrorMessage(error.message);
           }
         });
@@ -163,6 +162,7 @@ export const Account = () => {
     }
   };
   const handleRemovePhoto = async () => {
+    setUploading(true);
     try {
       await deletePhoto(currentUser.photoURL);
       await changePhoto('');
@@ -170,6 +170,7 @@ export const Account = () => {
     } catch (error) {
       setErrorMessage(error.message);
     }
+    setUploading(false);
   };
   const handleDeleteUser = async () => {
     try {
@@ -341,7 +342,7 @@ export const Account = () => {
           className={classes.avatar}
           alt='Avatar'
         />
-        {uploadProgress && (
+        {uploading && (
           <CircularProgress size={123} className={classes.fabProgress} />
         )}
       </div>
