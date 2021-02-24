@@ -15,6 +15,7 @@ import {
   Divider,
   IconButton,
   Menu,
+  Avatar,
   Slide,
   Fab,
   Zoom,
@@ -32,7 +33,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { ThemeToggle } from '../theme/ThemeToggle';
@@ -53,6 +53,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: 'inherit',
+  },
+  avatar: {
+    width: '1.5rem',
+    height: '1.5rem',
+    fontSize: '1rem',
+    backgroundColor: theme.palette.color,
   },
   appBar: {
     backgroundColor: theme.palette.background,
@@ -231,7 +237,16 @@ export const Header = ({ children }) => {
                     onClick={handleMenu}
                     color='inherit'
                   >
-                    <AccountCircle />
+                    {currentUser.photoURL ? (
+                      <Avatar
+                        src={currentUser.photoURL}
+                        className={classes.avatar}
+                      />
+                    ) : (
+                      <Avatar className={classes.avatar}>
+                        {currentUser.displayName.charAt(0)}
+                      </Avatar>
+                    )}
                   </IconButton>
                 </Tooltip>
                 <Menu
