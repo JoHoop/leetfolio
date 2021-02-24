@@ -237,16 +237,10 @@ export const Header = ({ children }) => {
                     onClick={handleMenu}
                     color='inherit'
                   >
-                    {currentUser.photoURL ? (
-                      <Avatar
-                        src={currentUser.photoURL}
-                        className={classes.avatar}
-                      />
-                    ) : (
-                      <Avatar className={classes.avatar}>
-                        {currentUser.displayName.charAt(0)}
-                      </Avatar>
-                    )}
+                    <Avatar
+                      src={currentUser.photoURL}
+                      className={classes.avatar}
+                    />
                   </IconButton>
                 </Tooltip>
                 <Menu
