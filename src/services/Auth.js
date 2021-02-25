@@ -8,24 +8,12 @@ export const signIn = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
-export const googleSignInPopup = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithPopup(provider);
-};
-
-export const googleSignInRedirect = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  return firebase.auth().signInWithRedirect(provider);
-};
-
-export const githubSignInPopup = () => {
-  const provider = new firebase.auth.GithubAuthProvider();
-  return firebase.auth().signInWithPopup(provider);
-};
-
-export const githubSignInRedirect = () => {
-  const provider = new firebase.auth.GithubAuthProvider();
-  return firebase.auth().signInWithRedirect(provider);
+export const signInWithAuthProvider = (provider, mobile) => {
+  const authProvider = new firebase.auth.OAuthProvider(provider.id);
+  if (mobile) {
+    return firebase.auth().signInWithRedirect(authProvider);
+  }
+  return firebase.auth().signInWithPopup(authProvider);
 };
 
 export const anonSignIn = () => {

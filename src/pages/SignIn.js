@@ -1,14 +1,8 @@
 import React, { useState, useCallback, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import {
-  signIn,
-  anonSignIn,
-  googleSignInPopup,
-  googleSignInRedirect,
-  githubSignInPopup,
-  githubSignInRedirect,
-} from '../services/Auth.js';
+import { signIn } from '../services/Auth.js';
+import { AuthProvidersList } from '../components/AuthProvidersList';
 import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
@@ -26,6 +20,7 @@ import {
   Container,
   makeStyles,
   useMediaQuery,
+  Divider,
 } from '@material-ui/core';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -42,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   signInButton: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  googleButton: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
@@ -88,47 +80,6 @@ export const SignIn = () => {
     }
     setIsLoading(false);
   }, [email, password]);
-
-  const handleSignInWithGoogle = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      if (isMobile) {
-        await googleSignInRedirect();
-      } else {
-        await googleSignInPopup();
-      }
-      return <Redirect to='/account' />;
-    } catch (error) {
-      setError(error);
-    }
-    setIsLoading(false);
-  }, []);
-
-  const handleSignInWithGithub = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      if (isMobile) {
-        await githubSignInRedirect();
-      } else {
-        await githubSignInPopup();
-      }
-      return <Redirect to='/account' />;
-    } catch (error) {
-      setError(error);
-    }
-    setIsLoading(false);
-  }, []);
-
-  const handleSignInAnonym = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      await anonSignIn();
-      return <Redirect to='/account' />;
-    } catch (error) {
-      setError(error);
-    }
-    setIsLoading(false);
-  }, []);
 
   const { currentUser } = useContext(UserContext);
 
@@ -201,31 +152,10 @@ export const SignIn = () => {
             </Link>
           </Grid>
         </Grid>
-        <Button
-          variant='outlined'
-          color='secondary'
-          className={classes.googleButton}
-          onClick={handleSignInWithGoogle}
-        >
-          Sign in with Google
-        </Button>
-        <Button
-          variant='outlined'
-          color='default'
-          className={classes.googleButton}
-          onClick={handleSignInWithGithub}
-        >
-          Sign in with GitHub
-        </Button>
-
-        <Button
-          variant='outlined'
-          color='default'
-          className={classes.googleButton}
-          onClick={handleSignInAnonym}
-        >
-          Sign in anonymously
-        </Button>
+        <br />
+        <Divider />
+        <br />
+        <AuthProvidersList mobile={isMobile} />
       </Box>
       <Notification notify={notify} setNotify={setNotify} />
       {isLoading && <Loading />}
