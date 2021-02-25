@@ -6,34 +6,31 @@ import { signOut } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider';
 import {
   Drawer,
+  SwipeableDrawer,
   AppBar,
-  Button,
   Toolbar,
   List,
-  Box,
   Typography,
   Divider,
   IconButton,
-  Menu,
   Avatar,
   Slide,
   Fab,
   Zoom,
-  MenuItem,
   Tooltip,
   ListItem,
   ListItemIcon,
   ListItemText,
   ListItemAvatar,
+  Hidden,
   makeStyles,
-  useTheme,
   Link,
   useMediaQuery,
   useScrollTrigger,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { ThemeToggle } from '../theme/ThemeToggle';
@@ -172,7 +169,7 @@ export const ScrollTop = ({ children }) => {
 
 export const Header = ({ children }) => {
   const classes = useStyles();
-  const theme = useTheme();
+
   const { currentUser } = useContext(UserContext);
 
   const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
@@ -180,22 +177,22 @@ export const Header = ({ children }) => {
     noSsr: true,
   });
 
-  const [open, setOpen] = useState(isDesktop);
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+    noSsr: true,
+  });
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const [desktopOpen, setDesktopOpen] = useState(isDesktop);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleDrawerToggle = () => {
+    if (isMobile) {
+      setDesktopOpen(false);
+      setMobileOpen(!mobileOpen);
+    } else {
+      setMobileOpen(false);
+      setDesktopOpen(!desktopOpen);
+    }
   };
 
   const handleSignOut = async () => {
@@ -203,8 +200,128 @@ export const Header = ({ children }) => {
     return <Redirect to='/signin' />;
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const profileOpen = Boolean(anchorEl);
+  const drawer = (
+    <React.Fragment>
+      <div className={classes.drawerHeader}>
+        {currentUser && (
+          <List>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar src={currentUser.photoURL} alt='Avatar' />
+              </ListItemAvatar>
+              <ListItemText
+                style={{
+                  marginLeft: 7,
+                }}
+                primary={currentUser.displayName}
+                secondary={currentUser.email}
+              />
+            </ListItem>
+          </List>
+        )}
+        <IconButton onClick={handleDrawerToggle}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </div>
+      <Divider />
+      <List>
+        <ListItem
+          button
+          key={'home'}
+          component={NavLink}
+          to={'/'}
+          exact
+          activeClassName='Mui-selected'
+        >
+          <ListItemIcon>
+            <Home />
+          </ListItemIcon>
+          <ListItemText primary={'Home'} />
+        </ListItem>
+        <ListItem
+          button
+          key={'editor'}
+          component={NavLink}
+          to={'/editor'}
+          activeClassName='Mui-selected'
+        >
+          <ListItemIcon>
+            <ListAlt />
+          </ListItemIcon>
+          <ListItemText primary={'Editor'} />
+        </ListItem>
+        <ListItem
+          button
+          key={'resume'}
+          component={NavLink}
+          to={'/resume'}
+          activeClassName='Mui-selected'
+        >
+          <ListItemIcon>
+            <Description />
+          </ListItemIcon>
+          <ListItemText primary={'Resume'} />
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        {currentUser ? (
+          <React.Fragment>
+            <ListItem
+              component={NavLink}
+              to={'/account'}
+              button
+              key={'account'}
+              activeClassName='Mui-selected'
+            >
+              <ListItemIcon>
+                <AccountBox />
+              </ListItemIcon>
+              <ListItemText primary={'Account'} />
+            </ListItem>
+            <ListItem
+              button
+              onClick={handleSignOut}
+              key={'signout'}
+              activeClassName='Mui-selected'
+            >
+              <ListItemIcon>
+                <ExitToApp />
+              </ListItemIcon>
+              <ListItemText primary={'Sign out'} />
+            </ListItem>
+          </React.Fragment>
+        ) : (
+          <ListItem
+            component={NavLink}
+            to={'/signin'}
+            button
+            key={'signin'}
+            activeClassName='Mui-selected'
+          >
+            <ListItemIcon>
+              <ExitToApp />
+            </ListItemIcon>
+            <ListItemText primary={'Sign in'} />
+          </ListItem>
+        )}
+      </List>
+
+      <Typography
+        variant='body2'
+        color='textSecondary'
+        align='center'
+        className={classes.footer}
+      >
+        {'Copyright © '}
+        <Link color='inherit' href='https://leetfolio.com'>
+          LeetFolio
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    </React.Fragment>
+  );
 
   return (
     <div className={classes.root}>
@@ -213,16 +330,16 @@ export const Header = ({ children }) => {
           position='fixed'
           color='default'
           className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
+            [classes.appBarShift]: desktopOpen,
           })}
         >
           <Toolbar id='back-to-top-anchor'>
             <IconButton
               color='inherit'
               aria-label='open drawer'
-              onClick={handleDrawerOpen}
               edge='start'
-              className={clsx(classes.menuButton, open && classes.hide)}
+              onClick={handleDrawerToggle}
+              className={clsx(classes.menuButton, desktopOpen && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -231,56 +348,6 @@ export const Header = ({ children }) => {
                 LeetFolio
               </Link>
             </Typography>
-            {currentUser ? (
-              <Box>
-                <Tooltip
-                  title={'Account'}
-                  placement='bottom'
-                  TransitionComponent={Zoom}
-                >
-                  <IconButton
-                    aria-label='account of current user'
-                    aria-controls='menu-appbar'
-                    aria-haspopup='true'
-                    onClick={handleMenu}
-                    color='inherit'
-                  >
-                    <Avatar
-                      src={currentUser.photoURL}
-                      className={classes.avatar}
-                      alt='Avatar'
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  id='menu-appbar'
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={profileOpen}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Settings</MenuItem>
-                  <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
-                </Menu>
-              </Box>
-            ) : (
-              <Button
-                component={NavLink}
-                to={'/signin'}
-                startIcon={<ExitToApp />}
-                color='inherit'
-              >
-                Sign in
-              </Button>
-            )}
             <ThemeToggle />
             <Tooltip
               title={'GitHub repo'}
@@ -301,144 +368,42 @@ export const Header = ({ children }) => {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Drawer
-        className={classes.drawer}
-        variant='persistent'
-        anchor='left'
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          {currentUser && (
-            <List>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar src={currentUser.photoURL} alt='Avatar' />
-                </ListItemAvatar>
-                <ListItemText
-                  style={{
-                    marginLeft: 7,
-                  }}
-                  primary={currentUser.displayName}
-                  secondary={currentUser.email}
-                />
-              </ListItem>
-            </List>
-          )}
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          <ListItem
-            button
-            key={'home'}
-            component={NavLink}
-            to={'/'}
-            exact
-            activeClassName='Mui-selected'
-          >
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary={'Home'} />
-          </ListItem>
-          <ListItem
-            button
-            key={'editor'}
-            component={NavLink}
-            to={'/editor'}
-            activeClassName='Mui-selected'
-          >
-            <ListItemIcon>
-              <ListAlt />
-            </ListItemIcon>
-            <ListItemText primary={'Editor'} />
-          </ListItem>
-          <ListItem
-            button
-            key={'resume'}
-            component={NavLink}
-            to={'/resume'}
-            activeClassName='Mui-selected'
-          >
-            <ListItemIcon>
-              <Description />
-            </ListItemIcon>
-            <ListItemText primary={'Resume'} />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          {currentUser ? (
-            <React.Fragment>
-              <ListItem
-                component={NavLink}
-                to={'/account'}
-                button
-                key={'account'}
-                activeClassName='Mui-selected'
-              >
-                <ListItemIcon>
-                  <AccountBox />
-                </ListItemIcon>
-                <ListItemText primary={'Account'} />
-              </ListItem>
-              <ListItem
-                button
-                onClick={handleSignOut}
-                key={'signout'}
-                activeClassName='Mui-selected'
-              >
-                <ListItemIcon>
-                  <ExitToApp />
-                </ListItemIcon>
-                <ListItemText primary={'Sign out'} />
-              </ListItem>
-            </React.Fragment>
-          ) : (
-            <ListItem
-              component={NavLink}
-              to={'/signin'}
-              button
-              key={'signin'}
-              activeClassName='Mui-selected'
-            >
-              <ListItemIcon>
-                <ExitToApp />
-              </ListItemIcon>
-              <ListItemText primary={'Sign in'} />
-            </ListItem>
-          )}
-        </List>
 
-        <Typography
-          variant='body2'
-          color='textSecondary'
-          align='center'
-          className={classes.footer}
+      <Hidden smUp implementation='css'>
+        <SwipeableDrawer
+          variant='temporary'
+          anchor='left'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true,
+          }}
         >
-          {'Copyright © '}
-          <Link color='inherit' href='https://leetfolio.com'>
-            LeetFolio
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-        </Typography>
-      </Drawer>
+          {drawer}
+        </SwipeableDrawer>
+      </Hidden>
+      <Hidden xsDown implementation='css'>
+        <Drawer
+          className={classes.drawer}
+          variant='persistent'
+          anchor='left'
+          open={desktopOpen}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: open,
+          [classes.contentShift]: desktopOpen,
         })}
       >
-        <div className={classes.drawerHeader} />
         {children}
       </main>
       <ScrollTop>
