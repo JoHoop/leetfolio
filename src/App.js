@@ -41,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    //backgroundColor: '#329cb9',
-    //backgroundImage: 'linear-gradient(135deg, #329cb9, #248daa)',
   },
   content: {
     marginTop: theme.spacing(8),
