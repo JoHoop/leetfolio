@@ -373,6 +373,7 @@ export const Header = ({ children }) => {
           variant='temporary'
           anchor='left'
           open={mobileOpen}
+          onOpen={handleDrawerToggle}
           onClose={handleDrawerToggle}
           classes={{
             paper: classes.drawerPaper,
