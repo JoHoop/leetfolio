@@ -8,9 +8,14 @@ export const signIn = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password);
 };
 
-export const signInWithGoogle = () => {
+export const googleSignInPopup = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   return firebase.auth().signInWithPopup(provider);
+};
+
+export const googleSignInRedirect = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  return firebase.auth().signInWithRedirect(provider);
 };
 
 export const signOut = () => {

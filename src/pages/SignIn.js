@@ -1,7 +1,11 @@
 import React, { useState, useCallback, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { signIn, signInWithGoogle } from '../services/Auth.js';
+import {
+  signIn,
+  googleSignInPopup,
+  googleSignInRedirect,
+} from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
@@ -18,6 +22,7 @@ import {
   Typography,
   Container,
   makeStyles,
+  useMediaQuery,
 } from '@material-ui/core';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -64,6 +69,11 @@ export const SignIn = () => {
     });
   };
 
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+    noSsr: true,
+  });
+
   const handleSignIn = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -79,7 +89,11 @@ export const SignIn = () => {
   const handleSignInWithGoogle = useCallback(async () => {
     setIsLoading(true);
     try {
-      await signInWithGoogle();
+      if (isMobile) {
+        await googleSignInRedirect();
+      } else {
+        await googleSignInPopup();
+      }
       return <Redirect to='/account' />;
     } catch (error) {
       setError(error);
