@@ -157,6 +157,7 @@ export const SignIn = () => {
         <Button
           variant='outlined'
           color='secondary'
+          disabled
           className={classes.googleButton}
           onClick={handleSignInWithGoogle}
         >
