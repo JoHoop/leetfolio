@@ -14,6 +14,7 @@ export const AuthProvidersList = ({ mobile }) => {
               key={authProvider.id}
               startIcon={authProvider.icon}
               style={{ color: authProvider.color }}
+              disabled={authProvider.id === 'apple.com'} // to remove
               variant='outlined'
               fullWidth
               onClick={() => signInWithAuthProvider(authProvider, mobile)}
