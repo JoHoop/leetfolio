@@ -16,7 +16,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import Firebase from '../services/Firebase';
+import firebase from '../services/Firebase';
 import { UserContext } from '../services/UserProvider.js';
 import {
   signOut,
@@ -106,15 +106,15 @@ export const Account = () => {
     var uploadTask = uploadPhoto(currentUser.uid, target.files[0]);
 
     uploadTask.on(
-      Firebase.storage.TaskEvent.STATE_CHANGED,
+      firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(`Upload is ${progress} % done`);
         switch (snapshot.state) {
-          case Firebase.storage.TaskState.PAUSED:
+          case firebase.storage.TaskState.PAUSED:
             console.log(`Upload is paused`);
             break;
-          case Firebase.storage.TaskState.RUNNING:
+          case firebase.storage.TaskState.RUNNING:
             console.log(`Upload is running`);
             break;
           default:
