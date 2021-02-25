@@ -1,5 +1,5 @@
 import React from 'react';
-import { Snackbar, makeStyles } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 export const Notification = ({ notify, setNotify }) => {
