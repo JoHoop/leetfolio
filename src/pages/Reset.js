@@ -5,9 +5,9 @@ import { resetPassword } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
 import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
+import { Notification } from '../components/Notification';
 import {
   Avatar,
-  Snackbar,
   Button,
   CssBaseline,
   TextField,
@@ -18,7 +18,6 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,26 +36,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
-};
-
 export const Reset = () => {
   const classes = useStyles();
   const [emailInput, setEmailInput] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: '',
+  });
   const [isLoading, setIsLoading] = useState(false);
-
-  const resetError = () => {
-    setErrorMessage('');
-  };
 
   const handleResetPassword = useCallback(async () => {
     setIsLoading(true);
     try {
       await resetPassword(emailInput);
     } catch (error) {
-      setErrorMessage(error.message);
+      setNotify({
+        isOpen: true,
+        message: error.message,
+        type: 'error',
+      });
     }
     setIsLoading(false);
   }, [emailInput]);
@@ -120,15 +119,7 @@ export const Reset = () => {
         </Grid>
       </Box>
       {isLoading && <Loading />}
-      <Snackbar
-        open={errorMessage !== ''}
-        autoHideDuration={6000}
-        onClose={resetError}
-      >
-        <Alert onClose={resetError} severity='error'>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
+      <Notification notify={notify} setNotify={setNotify} />
     </Container>
   );
 };

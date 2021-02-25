@@ -6,9 +6,9 @@ import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
+import { Notification } from '../components/Notification';
 import {
   Avatar,
-  Snackbar,
   Button,
   CssBaseline,
   TextField,
@@ -19,7 +19,7 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
+
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,10 +41,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
-};
-
 export const SignIn = () => {
   const classes = useStyles();
   const [values, handleChange] = UseForm({
@@ -53,12 +49,12 @@ export const SignIn = () => {
   });
 
   const { email, password } = values;
-  const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const resetError = () => {
-    setErrorMessage('');
-  };
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: '',
+  });
 
   const handleSignIn = useCallback(async () => {
     setIsLoading(true);
@@ -67,7 +63,11 @@ export const SignIn = () => {
 
       return <Redirect to='/account' />;
     } catch (error) {
-      setErrorMessage(error.message);
+      setNotify({
+        isOpen: true,
+        message: error.message,
+        type: 'error',
+      });
     }
     setIsLoading(false);
   }, [email, password]);
@@ -78,7 +78,11 @@ export const SignIn = () => {
       await signInWithGoogle;
       return <Redirect to='/account' />;
     } catch (error) {
-      setErrorMessage(error.message);
+      setNotify({
+        isOpen: true,
+        message: error.message,
+        type: 'error',
+      });
     }
     setIsLoading(false);
   }, []);
@@ -164,16 +168,8 @@ export const SignIn = () => {
           Sign in with Google
         </Button>
       </Box>
+      <Notification notify={notify} setNotify={setNotify} />
       {isLoading && <Loading />}
-      <Snackbar
-        open={errorMessage !== ''}
-        autoHideDuration={6000}
-        onClose={resetError}
-      >
-        <Alert onClose={resetError} severity='error'>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </Container>
   );
 };

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router';
 import {
   Avatar,
-  Snackbar,
   Button,
   Typography,
   Divider,
@@ -18,7 +17,6 @@ import {
   FormControlLabel,
   makeStyles,
 } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
 import Firebase from '../services/Firebase';
 import { UserContext } from '../services/UserProvider.js';
 import {
@@ -35,10 +33,7 @@ import {
 } from '../services/Auth.js';
 import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
-
-const Alert = (props) => {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
-};
+import { Notification } from '../components/Notification';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -62,8 +57,28 @@ export const Account = () => {
   const classes = useStyles();
 
   const { currentUser } = useContext(UserContext);
-  const [confirmMessage, setConfirmMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: '',
+    type: '',
+  });
+
+  const setSuccessMessage = (message) => {
+    setNotify({
+      isOpen: true,
+      message: message,
+      type: 'success',
+    });
+  };
+
+  const setErrorMessage = (error) => {
+    setNotify({
+      isOpen: true,
+      message: error.message,
+      type: 'error',
+    });
+  };
 
   const [open, setOpen] = React.useState(false);
 
@@ -73,14 +88,6 @@ export const Account = () => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const resetError = () => {
-    setErrorMessage('');
-  };
-
-  const resetConfirm = () => {
-    setConfirmMessage('');
   };
 
   const [uploading, setUploading] = useState(undefined);
@@ -116,7 +123,7 @@ export const Account = () => {
         }
       },
       (error) => {
-        console.log(error);
+        setErrorMessage(error);
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(async (downloadURL) => {
@@ -124,10 +131,10 @@ export const Account = () => {
             await deletePhoto(currentUser.photoURL);
             await changePhoto(downloadURL);
             setUploading(false);
-            setConfirmMessage('Avatar has been set.');
+            setSuccessMessage('Avatar has been set.');
           } catch (error) {
             setUploading(false);
-            setErrorMessage(error.message);
+            setErrorMessage(error);
           }
         });
       }
@@ -141,25 +148,25 @@ export const Account = () => {
   const handleChangeUsername = async () => {
     try {
       await changeUsername(username);
-      setConfirmMessage('Username has been set.');
+      setSuccessMessage('Username has been set.');
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
   };
   const handleChangeEmail = async () => {
     try {
       await changeEmail(email);
-      setConfirmMessage('Email has been set.');
+      setSuccessMessage('Email has been set.');
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
   };
   const handleChangePassword = async () => {
     try {
       await changePassword(newPassword);
-      setConfirmMessage('Password has been set.');
+      setSuccessMessage('Password has been set.');
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
   };
   const handleRemovePhoto = async () => {
@@ -167,9 +174,9 @@ export const Account = () => {
     try {
       await deletePhoto(currentUser.photoURL);
       await changePhoto('');
-      setConfirmMessage('Avatar has been removed.');
+      setSuccessMessage('Avatar has been removed.');
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
     setUploading(false);
   };
@@ -178,24 +185,24 @@ export const Account = () => {
       await deleteUser();
       return <Redirect to='/signin' />;
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
     handleClose();
   };
   const handleResetPassword = async () => {
     try {
       await resetPassword(currentUser.email);
-      setConfirmMessage('Password reset link has been sent to your email!');
+      setSuccessMessage('Password reset link has been sent to your email!');
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
   };
   const handleVerifyEmail = async () => {
     try {
       await verifyEmail();
-      setConfirmMessage('Verification link has been sent to your email');
+      setSuccessMessage('Verification link has been sent to your email');
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error);
     }
   };
 
@@ -434,25 +441,7 @@ export const Account = () => {
           </Button>
         </DialogActions>
       </Dialog>
-
-      <Snackbar
-        open={confirmMessage !== ''}
-        autoHideDuration={6000}
-        onClose={resetConfirm}
-      >
-        <Alert onClose={resetConfirm} severity='success'>
-          {confirmMessage}
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={errorMessage !== ''}
-        autoHideDuration={6000}
-        onClose={resetError}
-      >
-        <Alert onClose={resetError} severity='error'>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
+      <Notification notify={notify} setNotify={setNotify} />
     </React.Fragment>
   );
 };
