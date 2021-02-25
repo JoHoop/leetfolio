@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: -drawerWidth,
+    [theme.breakpoints.up('sm')]: { marginLeft: -drawerWidth },
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
