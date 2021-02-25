@@ -79,7 +79,7 @@ export const SignIn = () => {
   const handleSignInWithGoogle = useCallback(async () => {
     // setIsLoading(true);
     try {
-      await signInWithGoogle;
+      await signInWithGoogle();
       return <Redirect to='/account' />;
     } catch (error) {
       setError(error);
