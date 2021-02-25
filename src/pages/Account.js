@@ -12,9 +12,7 @@ import {
   DialogTitle,
   Grid,
   CircularProgress,
-  Checkbox,
   TextField,
-  FormControlLabel,
   makeStyles,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';

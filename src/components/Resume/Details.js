@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
 import { SectionHeader } from './fragments/SectionHeader';
 import { Spacing } from './fragments/Spacing';
 
