@@ -17,6 +17,7 @@ import {
   FormControlLabel,
   makeStyles,
 } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import Firebase from '../services/Firebase';
 import { UserContext } from '../services/UserProvider.js';
 import {
@@ -219,6 +220,21 @@ export const Account = () => {
       </Button>
       <br />
       <br />
+      {!currentUser.emailVerified && (
+        <Alert
+          variant='outlined'
+          severity='warning'
+          action={
+            <Button onClick={handleVerifyEmail} color='inherit'>
+              Send link
+            </Button>
+          }
+        >
+          You have not yet verified your email address.
+        </Alert>
+      )}
+      <br />
+      <br />
       <Divider />
       <br />
       <br />
@@ -322,32 +338,6 @@ export const Account = () => {
       >
         Reset by email
       </Button>
-      <br />
-      <br />
-      <Divider />
-      <br />
-      <br />
-      <FormControlLabel
-        disabled
-        control={
-          <Checkbox checked={currentUser.emailVerified} name='checkedE' />
-        }
-        label={
-          currentUser.emailVerified
-            ? 'You are verified'
-            : 'You are not yet verified'
-        }
-      />
-      {!currentUser.emailVerified && (
-        <Button
-          onClick={handleVerifyEmail}
-          fullWidth
-          variant='outlined'
-          color='primary'
-        >
-          Send verification email
-        </Button>
-      )}
       <br />
       <br />
       <Divider />
