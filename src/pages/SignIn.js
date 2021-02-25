@@ -56,6 +56,14 @@ export const SignIn = () => {
     type: '',
   });
 
+  const setError = (error) => {
+    setNotify({
+      isOpen: true,
+      message: error.message,
+      type: 'error',
+    });
+  };
+
   const handleSignIn = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -63,11 +71,7 @@ export const SignIn = () => {
 
       return <Redirect to='/account' />;
     } catch (error) {
-      setNotify({
-        isOpen: true,
-        message: error.message,
-        type: 'error',
-      });
+      setError(error);
     }
     setIsLoading(false);
   }, [email, password]);
@@ -78,11 +82,7 @@ export const SignIn = () => {
       await signInWithGoogle;
       return <Redirect to='/account' />;
     } catch (error) {
-      setNotify({
-        isOpen: true,
-        message: error.message,
-        type: 'error',
-      });
+      setError(error);
     }
     setIsLoading(false);
   }, []);
