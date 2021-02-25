@@ -5,6 +5,8 @@ import {
   signIn,
   googleSignInPopup,
   googleSignInRedirect,
+  githubSignInPopup,
+  githubSignInRedirect,
 } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../services/UseForm';
@@ -101,6 +103,21 @@ export const SignIn = () => {
     setIsLoading(false);
   }, []);
 
+  const handleSignInWithGithub = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      if (isMobile) {
+        await githubSignInRedirect();
+      } else {
+        await githubSignInPopup();
+      }
+      return <Redirect to='/account' />;
+    } catch (error) {
+      setError(error);
+    }
+    setIsLoading(false);
+  }, []);
+
   const { currentUser } = useContext(UserContext);
 
   if (currentUser) {
@@ -179,6 +196,14 @@ export const SignIn = () => {
           onClick={handleSignInWithGoogle}
         >
           Sign in with Google
+        </Button>
+        <Button
+          variant='outlined'
+          color='default'
+          className={classes.googleButton}
+          onClick={handleSignInWithGithub}
+        >
+          Sign in with GitHub
         </Button>
       </Box>
       <Notification notify={notify} setNotify={setNotify} />

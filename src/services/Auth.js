@@ -18,6 +18,16 @@ export const googleSignInRedirect = () => {
   return firebase.auth().signInWithRedirect(provider);
 };
 
+export const githubSignInPopup = () => {
+  const provider = new firebase.auth.GithubAuthProvider();
+  return firebase.auth().signInWithPopup(provider);
+};
+
+export const githubSignInRedirect = () => {
+  const provider = new firebase.auth.GithubAuthProvider();
+  return firebase.auth().signInWithRedirect(provider);
+};
+
 export const signOut = () => {
   return firebase.auth().signOut();
 };
