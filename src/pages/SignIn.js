@@ -77,14 +77,14 @@ export const SignIn = () => {
   }, [email, password]);
 
   const handleSignInWithGoogle = useCallback(async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       await signInWithGoogle;
       return <Redirect to='/account' />;
     } catch (error) {
       setError(error);
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   }, []);
 
   const { currentUser } = useContext(UserContext);
@@ -161,7 +161,6 @@ export const SignIn = () => {
         <Button
           variant='outlined'
           color='secondary'
-          disabled
           className={classes.googleButton}
           onClick={handleSignInWithGoogle}
         >
