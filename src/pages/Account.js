@@ -208,7 +208,11 @@ export const Account = () => {
   return (
     <React.Fragment>
       <Typography component='h1' variant='h2' color='textPrimary' gutterBottom>
-        Hello, {currentUser.displayName || currentUser.email.split('@')[0]}!
+        Hello,{' '}
+        {currentUser.email
+          ? currentUser.displayName || currentUser.email.split('@')[0]
+          : 'Anonymous'}
+        {'!'}
       </Typography>
       <Typography variant='h5' color='textSecondary' paragraph>
         Manage your account.

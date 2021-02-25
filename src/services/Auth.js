@@ -28,6 +28,10 @@ export const githubSignInRedirect = () => {
   return firebase.auth().signInWithRedirect(provider);
 };
 
+export const anonSignIn = () => {
+  return firebase.auth().signInAnonymously();
+};
+
 export const signOut = () => {
   return firebase.auth().signOut();
 };

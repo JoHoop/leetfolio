@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import {
   signIn,
+  anonSignIn,
   googleSignInPopup,
   googleSignInRedirect,
   githubSignInPopup,
@@ -118,6 +119,17 @@ export const SignIn = () => {
     setIsLoading(false);
   }, []);
 
+  const handleSignInAnonym = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      await anonSignIn();
+      return <Redirect to='/account' />;
+    } catch (error) {
+      setError(error);
+    }
+    setIsLoading(false);
+  }, []);
+
   const { currentUser } = useContext(UserContext);
 
   if (currentUser) {
@@ -204,6 +216,15 @@ export const SignIn = () => {
           onClick={handleSignInWithGithub}
         >
           Sign in with GitHub
+        </Button>
+
+        <Button
+          variant='outlined'
+          color='default'
+          className={classes.googleButton}
+          onClick={handleSignInAnonym}
+        >
+          Sign in anonymously
         </Button>
       </Box>
       <Notification notify={notify} setNotify={setNotify} />
