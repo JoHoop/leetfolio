@@ -1,3 +1,5 @@
+![React Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/react.svg)
+
 # [LeetFolio.com](https://leetfolio.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
