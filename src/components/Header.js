@@ -126,7 +126,14 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   logo: {
-    maxWidth: 24,
+    maxHeight: '2.25rem',
+  },
+  iconButton: {
+    height: '3rem',
+    width: '3rem',
+  },
+  icon: {
+    fontSize: '1.5rem',
   },
 }));
 
