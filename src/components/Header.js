@@ -350,13 +350,15 @@ export const Header = ({ children }) => {
               color='inherit'
               aria-label={'LeetFolio logo'}
               className={classes.iconButton}
-              href='https://github.com/JoHoop/leetfolio'
-              target='_blank'
-              rel='noreferrer'
+              component={NavLink}
+              to='/'
             >
-              <img src={LeetFolioLogo} className={classes.logo} />
+              <img
+                src={LeetFolioLogo}
+                className={classes.logo}
+                alt='LeetFolio Logo'
+              />
             </IconButton>
-
             <Typography variant='h6' className={classes.title} noWrap>
               <Link color='inherit' component={NavLink} to='/' underline='none'>
                 LeetFolio
