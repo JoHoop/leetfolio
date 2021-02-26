@@ -32,6 +32,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import LeetFolioLogo from '../data/leetfolio.svg';
 import { ThemeToggle } from '../theme/ThemeToggle';
 import {
   AccountBox,
@@ -123,6 +124,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 2),
     ...theme.mixins.toolbar,
+  },
+  logo: {
+    maxWidth: 24,
   },
 }));
 
@@ -342,6 +346,17 @@ export const Header = ({ children }) => {
             >
               <MenuIcon />
             </IconButton>
+            <IconButton
+              color='inherit'
+              aria-label={'LeetFolio logo'}
+              className={classes.iconButton}
+              href='https://github.com/JoHoop/leetfolio'
+              target='_blank'
+              rel='noreferrer'
+            >
+              <img src={LeetFolioLogo} className={classes.logo} />
+            </IconButton>
+
             <Typography variant='h6' className={classes.title} noWrap>
               <Link color='inherit' component={NavLink} to='/' underline='none'>
                 LeetFolio
