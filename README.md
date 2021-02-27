@@ -1,10 +1,12 @@
-![LeetFolio Logo](https://github.com/JoHoop/leetfolio/blob/main/src/data/leetfolio.svg)
+<img src="https://github.com/JoHoop/leetfolio/blob/main/src/illustrations/leetfolio.svg" alt="LeetFolio Logo" width="75" height="75">
 
 # [LeetFolio.com](https://leetfolio.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Vector illustrations courtesy of [unDraw](https://undraw.co).
+
+<img src="https://github.com/JoHoop/leetfolio/blob/main/src/illustrations/onlineResume.svg" alt="Resume Illustration">
 
 ## Available Scripts
 
