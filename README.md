@@ -1,4 +1,4 @@
-![LeetFolio Logo](https://github.com/JoHoop/leetfolio/blob/main/src/data/leetfolio.svg)
+<img src="https://github.com/JoHoop/leetfolio/blob/main/src/illustrations/leetfolio.svg" alt="LeetFolio Logo" width="50" height="50">
 
 # [LeetFolio.com](https://leetfolio.com)
 
