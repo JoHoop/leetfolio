@@ -1,4 +1,4 @@
-![React Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/react.svg)
+![LeetFolio Logo](https://github.com/JoHoop/leetfolio/blob/main/src/data/leetfolio.svg)
 
 # [LeetFolio.com](https://leetfolio.com)
 
