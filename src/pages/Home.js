@@ -1,16 +1,9 @@
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
-import OnlineResumeIllustration from '../data/onlineResume.svg';
-
-const useStyles = makeStyles((theme) => ({
-  illustration: {
-    width: '100%',
-  },
-}));
+import { Typography } from '@material-ui/core';
+import { Illustration } from '../components/Illustration';
+import OnlineResume from '../data/onlineResume.svg';
 
 export const Home = () => {
-  const classes = useStyles();
-
   return (
     <React.Fragment>
       <Typography component='h1' variant='h2' color='textPrimary' gutterBottom>
@@ -19,11 +12,7 @@ export const Home = () => {
       <Typography variant='h5' color='textSecondary' paragraph>
         LeetFolio
       </Typography>
-      <img
-        src={OnlineResumeIllustration}
-        className={classes.illustration}
-        alt='LeetFolio Logo'
-      />
+      <Illustration illustration={OnlineResume} />
     </React.Fragment>
   );
 };
