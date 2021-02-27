@@ -2,6 +2,8 @@
 
 # [LeetFolio.com](https://leetfolio.com)
 
+## the best way to create stunning resumes in minutes.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Vector illustrations courtesy of [unDraw](https://undraw.co).
