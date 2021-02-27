@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
-import { Button, Box, makeStyles } from '@material-ui/core';
+import { Button, Box, Typography, makeStyles } from '@material-ui/core';
 import { ResumeContext } from '../components/Resume/ResumeProvider';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
 import { Clear, GetApp, Publish, Replay, Save } from '@material-ui/icons';
+import { Illustration } from '../components/Illustration';
+import UpdatedResume from '../illustrations/updatedResume.svg';
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
@@ -45,6 +47,13 @@ export const Editor = () => {
 
   return (
     <React.Fragment>
+      <Typography component='h1' variant='h2' color='textPrimary' gutterBottom>
+        Editor
+      </Typography>
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Update your resume.json file
+      </Typography>
+      <Illustration illustration={UpdatedResume} />
       <Box className={classes.buttons}>
         <input
           type='file'
