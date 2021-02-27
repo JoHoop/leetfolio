@@ -33,6 +33,8 @@ import {
 import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
 import { Notification } from '../components/Notification';
+import { Illustration } from '../components/Illustration';
+import ShortBio from '../illustrations/shortBio.svg';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -217,11 +219,6 @@ export const Account = () => {
       <Typography variant='h5' color='textSecondary' paragraph>
         Manage your account.
       </Typography>
-      <Button onClick={handleSignOut} variant='outlined' color='primary'>
-        Sign out
-      </Button>
-      <br />
-      <br />
       {!currentUser.emailVerified && (
         <Alert
           variant='outlined'
@@ -235,11 +232,10 @@ export const Account = () => {
           You have not yet verified your email address.
         </Alert>
       )}
-      <br />
-      <br />
-      <Divider />
-      <br />
-      <br />
+      <Button onClick={handleSignOut} variant='outlined' color='primary'>
+        Sign out
+      </Button>
+      <Illustration illustration={ShortBio} />
       <Grid container spacing={0}>
         <Grid item xs={12}>
           <TextField
