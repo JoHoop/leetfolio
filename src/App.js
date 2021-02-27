@@ -43,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
   },
   content: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(16),
+    marginBottom: theme.spacing(4),
   },
 }));
 
