@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Button, Box, Typography, makeStyles } from '@material-ui/core';
 import { ResumeContext } from '../components/Resume/ResumeProvider';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
 import { Clear, GetApp, Publish, Replay, Save } from '@material-ui/icons';
+import PageviewIcon from '@material-ui/icons/Pageview';
 import { Illustration } from '../components/Illustration';
 import UpdatedResume from '../illustrations/updatedResume.svg';
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
     '& > *': {
-      margin: theme.spacing(1),
+      marginRight: theme.spacing(1),
     },
   },
 }));
@@ -76,6 +78,14 @@ export const Editor = () => {
           download='resume.json'
         >
           Download
+        </Button>
+        <Button
+          variant='outlined'
+          startIcon={<PageviewIcon />}
+          component={NavLink}
+          to={'/resume'}
+        >
+          Preview
         </Button>
         <Button variant='outlined' startIcon={<Replay />} onClick={setDefault}>
           Default
