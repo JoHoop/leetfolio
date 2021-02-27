@@ -32,7 +32,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import LeetFolioLogo from '../data/leetfolio.svg';
+import LeetFolioLogo from '../illustrations/leetfolio.svg';
 import { ThemeToggle } from '../theme/ThemeToggle';
 import {
   AccountBox,

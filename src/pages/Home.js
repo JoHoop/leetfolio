@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { Illustration } from '../components/Illustration';
-import OnlineResume from '../data/onlineResume.svg';
+import OnlineResume from '../illustrations/onlineResume.svg';
 
 export const Home = () => {
   return (
