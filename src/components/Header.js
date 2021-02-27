@@ -32,7 +32,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import LeetFolioLogo from '../illustrations/leetfolio.svg';
+import { Logo } from '../components/Logo';
 import { ThemeToggle } from '../theme/ThemeToggle';
 import {
   AccountBox,
@@ -360,11 +360,7 @@ export const Header = ({ children }) => {
               component={NavLink}
               to='/'
             >
-              <img
-                src={LeetFolioLogo}
-                className={classes.logo}
-                alt='LeetFolio Logo'
-              />
+              <Logo className={classes.logo} />
             </IconButton>
             <Typography variant='h6' className={classes.title} noWrap>
               <Link color='inherit' component={NavLink} to='/' underline='none'>

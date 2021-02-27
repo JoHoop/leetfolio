@@ -7,6 +7,7 @@ import { UseForm } from '../services/UseForm';
 import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
 import { Notification } from '../components/Notification';
+import { Logo } from '../components/Logo';
 import {
   Avatar,
   Button,
@@ -19,7 +20,6 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,9 +28,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
+  logo: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -83,9 +82,7 @@ export const SignUp = () => {
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <Box className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Logo className={classes.logo} />
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
