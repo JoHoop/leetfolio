@@ -47,15 +47,15 @@ export const Home = () => {
       <Illustration illustration={OnlineResume} />
       <br />
       <br />
-      <Typography variant='h6' color='textSecondary' paragraph>
+      <Typography variant='h5' color='textSecondary' paragraph>
         An easy to use web app to build and maintain responsive resumes as
         websites.
       </Typography>
-      <Typography variant='h6' color='textSecondary' paragraph>
+      <Typography variant='h5' color='textSecondary' paragraph>
         Be in control of your data in a raw format, to edit and download at any
         time.
       </Typography>
-      <Typography variant='h6' color='textSecondary' paragraph>
+      <Typography variant='h5' color='textSecondary' paragraph>
         Built on{' '}
         <Link href='https://jsonresume.org' underline='none'>
           JSON Resume
