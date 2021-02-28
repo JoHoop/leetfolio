@@ -213,22 +213,6 @@ export const Header = ({ children }) => {
   const drawer = (
     <React.Fragment>
       <div className={classes.drawerHeader}>
-        {currentUser && (
-          <List>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar src={currentUser.photoURL} alt='Avatar' />
-              </ListItemAvatar>
-              <ListItemText
-                style={{
-                  marginLeft: 7,
-                }}
-                primary={currentUser.displayName}
-                secondary={currentUser.email}
-              />
-            </ListItem>
-          </List>
-        )}
         <IconButton onClick={handleDrawerToggle}>
           <ChevronLeftIcon />
         </IconButton>
@@ -277,6 +261,23 @@ export const Header = ({ children }) => {
       <List>
         {currentUser ? (
           <React.Fragment>
+            <ListItem
+              component={NavLink}
+              to={'/account'}
+              button
+              key={'account'}
+            >
+              <ListItemAvatar>
+                <Avatar src={currentUser.photoURL} alt='Avatar' />
+              </ListItemAvatar>
+              <ListItemText
+                style={{
+                  marginLeft: 7,
+                }}
+                primary={currentUser.displayName}
+                secondary={currentUser.email}
+              />
+            </ListItem>
             <ListItem
               component={NavLink}
               to={'/account'}
