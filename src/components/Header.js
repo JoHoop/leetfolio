@@ -15,7 +15,6 @@ import {
   IconButton,
   Avatar,
   Slide,
-  Fab,
   Zoom,
   Tooltip,
   ListItem,
@@ -109,11 +108,6 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-  backToTop: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
   footer: {
     padding: theme.spacing(2, 2),
     marginTop: 'auto',
@@ -144,36 +138,6 @@ export const HideOnScroll = ({ children }) => {
     <Slide appear={false} direction='down' in={!trigger}>
       {children}
     </Slide>
-  );
-};
-
-export const ScrollTop = ({ children }) => {
-  const classes = useStyles();
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 100,
-  });
-
-  const handleClick = (event) => {
-    const anchor = (event.target.ownerDocument || document).querySelector(
-      '#back-to-top-anchor'
-    );
-
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
-
-  return (
-    <Zoom in={trigger}>
-      <div
-        onClick={handleClick}
-        role='presentation'
-        className={classes.backToTop}
-      >
-        {children}
-      </div>
-    </Zoom>
   );
 };
 
@@ -427,11 +391,6 @@ export const Header = ({ children }) => {
       >
         {children}
       </main>
-      <ScrollTop>
-        <Fab color='default' size='small' aria-label='scroll back to top'>
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
     </div>
   );
 };
