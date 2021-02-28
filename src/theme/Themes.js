@@ -22,6 +22,11 @@ export const LightTheme = responsiveFontSizes(
           },
         },
       },
+      MuiPaper: {
+        root: {
+          backgroundColor: '#f5f5f5',
+        },
+      },
     },
   })
 );
@@ -42,6 +47,11 @@ export const DarkTheme = responsiveFontSizes(
             color: white,
             backgroundColor: black,
           },
+        },
+      },
+      MuiPaper: {
+        root: {
+          backgroundColor: '#212121',
         },
       },
     },
