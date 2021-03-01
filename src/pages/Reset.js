@@ -48,6 +48,12 @@ export const Reset = () => {
     setIsLoading(true);
     try {
       await resetPassword(emailInput);
+      setNotify({
+        isOpen: true,
+        message:
+          'A password reset email was sent to help you set up a new one.',
+        type: 'success',
+      });
     } catch (error) {
       setNotify({
         isOpen: true,
