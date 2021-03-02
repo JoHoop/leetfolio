@@ -7,8 +7,6 @@ import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
 import { Clear, GetApp, Publish, Replay, Save } from '@material-ui/icons';
 import PageviewIcon from '@material-ui/icons/Pageview';
-import { Illustration } from '../components/Illustration';
-import UpdatedResume from '../illustrations/updatedResume.svg';
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
@@ -55,7 +53,6 @@ export const Editor = () => {
       <Typography variant='h5' color='textSecondary' paragraph>
         Update your resume.json file
       </Typography>
-      <Illustration illustration={UpdatedResume} />
       <Box className={classes.buttons}>
         <input
           type='file'
