@@ -53,7 +53,7 @@ export const AuthProvidersLinks = ({ mobile }) => {
   const handleUnlink = async (authProvider) => {
     setLoading(true);
     try {
-      await unlinkAuthProvider(authProvider, mobile);
+      await unlinkAuthProvider(authProvider);
       setNotify({
         isOpen: true,
         message: 'Accounts successfully unlinked',

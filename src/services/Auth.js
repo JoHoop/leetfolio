@@ -34,12 +34,8 @@ export const linkAuthProvider = (provider, mobile) => {
   return auth.currentUser.linkWithPopup(authProvider);
 };
 
-export const unlinkAuthProvider = (provider, mobile) => {
-  const authProvider = new firebase.auth.OAuthProvider(provider.id);
-  if (mobile) {
-    return auth.currentUser.unlinkWithRedirect(authProvider);
-  }
-  return auth.currentUser.unlinkWithPopup(authProvider);
+export const unlinkAuthProvider = (provider) => {
+  return auth.currentUser.unlink(provider.id);
 };
 
 export const authProviderData = (providerId) => {
