@@ -1,49 +1,85 @@
 import firebase from './Firebase';
 
+const auth = firebase.auth();
+
 export const signUp = (email, password) => {
-  return firebase.auth().createUserWithEmailAndPassword(email, password);
+  return auth.createUserWithEmailAndPassword(email, password);
 };
 
 export const signIn = (email, password) => {
-  return firebase.auth().signInWithEmailAndPassword(email, password);
+  return auth.signInWithEmailAndPassword(email, password);
 };
 
 export const signInWithAuthProvider = (provider, mobile) => {
   const authProvider = new firebase.auth.OAuthProvider(provider.id);
   if (mobile) {
-    return firebase.auth().signInWithRedirect(authProvider);
+    return auth.signInWithRedirect(authProvider);
   }
-  return firebase.auth().signInWithPopup(authProvider);
+  return auth.signInWithPopup(authProvider);
 };
 
 export const anonSignIn = () => {
-  return firebase.auth().signInAnonymously();
+  return auth.signInAnonymously();
 };
 
 export const signOut = () => {
-  return firebase.auth().signOut();
+  return auth.signOut();
+};
+
+export const linkAuthProvider = (provider, mobile) => {
+  const authProvider = new firebase.auth.OAuthProvider(provider.id);
+  if (mobile) {
+    return auth.currentUser.linkWithRedirect(authProvider);
+  }
+  return auth.currentUser.linkWithPopup(authProvider);
+};
+
+export const unlinkAuthProvider = (provider, mobile) => {
+  const authProvider = new firebase.auth.OAuthProvider(provider.id);
+  if (mobile) {
+    return auth.currentUser.unlinkWithRedirect(authProvider);
+  }
+  return auth.currentUser.unlinkWithPopup(authProvider);
+};
+
+export const authProviderData = (providerId) => {
+  if (!providerId) {
+    return;
+  }
+
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    return;
+  }
+
+  const providerData = currentUser.providerData;
+  if (!providerData) {
+    return;
+  }
+
+  return providerData.find((authProvider) => authProvider.id === providerId);
 };
 
 export const changeUsername = (username) => {
-  return firebase.auth().currentUser.updateProfile({
+  return auth.currentUser.updateProfile({
     displayName: username,
   });
 };
 
 export const changeEmail = (email) => {
-  return firebase.auth().currentUser.updateEmail(email);
+  return auth.currentUser.updateEmail(email);
 };
 
 export const verifyEmail = () => {
-  return firebase.auth().currentUser.sendEmailVerification();
+  return auth.currentUser.sendEmailVerification();
 };
 
 export const changePassword = (password) => {
-  return firebase.auth().currentUser.updatePassword(password);
+  return auth.currentUser.updatePassword(password);
 };
 
 export const resetPassword = (email) => {
-  return firebase.auth().sendPasswordResetEmail(email);
+  return auth.sendPasswordResetEmail(email);
 };
 
 export const uploadPhoto = (userID, file) => {
@@ -55,7 +91,7 @@ export const uploadPhoto = (userID, file) => {
 };
 
 export const changePhoto = (url) => {
-  return firebase.auth().currentUser.updateProfile({
+  return auth.currentUser.updateProfile({
     photoURL: url,
   });
 };
@@ -66,5 +102,5 @@ export const deletePhoto = (url) => {
 };
 
 export const deleteUser = () => {
-  return firebase.auth().currentUser.delete();
+  return auth.currentUser.delete();
 };

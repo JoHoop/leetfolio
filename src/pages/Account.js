@@ -14,6 +14,7 @@ import {
   CircularProgress,
   TextField,
   makeStyles,
+  useMediaQuery,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import firebase from '../services/Firebase';
@@ -35,6 +36,7 @@ import { isEmailValid } from '../services/Validators';
 import { Notification } from '../components/Notification';
 import { Illustration } from '../components/Illustration';
 import ShortBio from '../illustrations/shortBio.svg';
+import { AuthProvidersLinks } from '../components/AuthProvidersLinks';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -56,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const Account = () => {
   const classes = useStyles();
+
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'), {
+    defaultMatches: true,
+    noSsr: true,
+  });
 
   const { currentUser } = useContext(UserContext);
 
@@ -377,7 +384,12 @@ export const Account = () => {
           Remove
         </Button>
       </React.Fragment>
-
+      <br />
+      <br />
+      <Divider />
+      <br />
+      <br />
+      <AuthProvidersLinks mobile={isMobile} />
       <br />
       <br />
       <Divider />
