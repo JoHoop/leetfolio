@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { signIn } from '../services/Auth.js';
@@ -46,7 +46,7 @@ export const SignIn = () => {
   });
 
   const { email, password } = values;
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
@@ -66,17 +66,16 @@ export const SignIn = () => {
     noSsr: true,
   });
 
-  const handleSignIn = useCallback(async () => {
-    setIsLoading(true);
+  const handleSignIn = async () => {
+    setLoading(true);
     try {
       await signIn(email, password);
-
       return <Redirect to='/account' />;
     } catch (error) {
       setError(error);
     }
-    setIsLoading(false);
-  }, [email, password]);
+    setLoading(false);
+  };
 
   const { currentUser } = useContext(UserContext);
 
@@ -153,7 +152,7 @@ export const SignIn = () => {
         <AuthProvidersList mobile={isMobile} />
       </Box>
       <Notification notify={notify} setNotify={setNotify} />
-      {isLoading && <Loading />}
+      {loading && <Loading />}
     </Container>
   );
 };

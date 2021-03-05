@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { signUp, changeUsername } from '../services/Auth.js';
@@ -9,7 +9,6 @@ import { Loading } from '../components/Loading';
 import { Notification } from '../components/Notification';
 import { Logo } from '../components/Logo';
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
@@ -50,10 +49,10 @@ export const SignUp = () => {
     message: '',
     type: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSignUp = useCallback(async () => {
-    setIsLoading(true);
+  const handleSignUp = async () => {
+    setLoading(true);
     try {
       await signUp(email, password);
       await changeUsername(username);
@@ -65,8 +64,8 @@ export const SignUp = () => {
         type: 'error',
       });
     }
-    setIsLoading(false);
-  }, [email, password, username]);
+    setLoading(false);
+  };
 
   const { currentUser } = useContext(UserContext);
 
@@ -152,7 +151,7 @@ export const SignUp = () => {
           </Grid>
         </Grid>
       </Box>
-      {isLoading && <Loading />}
+      {loading && <Loading />}
       <Notification notify={notify} setNotify={setNotify} />
     </Container>
   );

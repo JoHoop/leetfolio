@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { resetPassword } from '../services/Auth.js';
@@ -42,10 +42,10 @@ export const Reset = () => {
     message: '',
     type: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleResetPassword = useCallback(async () => {
-    setIsLoading(true);
+  const handleResetPassword = async () => {
+    setLoading(true);
     try {
       await resetPassword(emailInput);
       setNotify({
@@ -61,8 +61,8 @@ export const Reset = () => {
         type: 'error',
       });
     }
-    setIsLoading(false);
-  }, [emailInput]);
+    setLoading(false);
+  };
 
   const { currentUser } = useContext(UserContext);
 
@@ -120,7 +120,7 @@ export const Reset = () => {
           </Grid>
         </Grid>
       </Box>
-      {isLoading && <Loading />}
+      {loading && <Loading />}
       <Notification notify={notify} setNotify={setNotify} />
     </Container>
   );
