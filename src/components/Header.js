@@ -182,6 +182,30 @@ export const Header = ({ children }) => {
         </IconButton>
       </div>
       <Divider />
+      {currentUser && (
+        <React.Fragment>
+          <List>
+            <ListItem
+              component={NavLink}
+              to={'/account'}
+              button
+              key={'account'}
+            >
+              <ListItemAvatar>
+                <Avatar src={currentUser.photoURL} alt='Avatar' />
+              </ListItemAvatar>
+              <ListItemText
+                style={{
+                  marginLeft: 7,
+                }}
+                primary={currentUser.displayName}
+                secondary={currentUser.email}
+              />
+            </ListItem>
+          </List>
+          <Divider />
+        </React.Fragment>
+      )}
       <List>
         <ListItem
           button
@@ -225,23 +249,6 @@ export const Header = ({ children }) => {
       <List>
         {currentUser ? (
           <React.Fragment>
-            <ListItem
-              component={NavLink}
-              to={'/account'}
-              button
-              key={'account'}
-            >
-              <ListItemAvatar>
-                <Avatar src={currentUser.photoURL} alt='Avatar' />
-              </ListItemAvatar>
-              <ListItemText
-                style={{
-                  marginLeft: 7,
-                }}
-                primary={currentUser.displayName}
-                secondary={currentUser.email}
-              />
-            </ListItem>
             <ListItem
               component={NavLink}
               to={'/account'}
