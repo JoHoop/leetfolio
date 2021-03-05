@@ -3,7 +3,6 @@ import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { resetPassword } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
-import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
 import { Notification } from '../components/Notification';
 import { Logo } from '../components/Logo';
@@ -70,10 +69,6 @@ export const Reset = () => {
     return <Redirect to='/account' />;
   }
 
-  const emailInputValid = () => {
-    return emailInput === '' || isEmailValid(emailInput);
-  };
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -102,7 +97,6 @@ export const Reset = () => {
           variant='outlined'
           color='primary'
           className={classes.submit}
-          disabled={!emailInputValid}
           onClick={handleResetPassword}
         >
           Sign in

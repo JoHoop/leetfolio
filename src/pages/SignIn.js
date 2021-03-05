@@ -5,7 +5,6 @@ import { signIn } from '../services/Auth.js';
 import { AuthProvidersList } from '../components/AuthProvidersList';
 import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../services/UseForm';
-import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
 import { Notification } from '../components/Notification';
 import { Logo } from '../components/Logo';
@@ -83,10 +82,6 @@ export const SignIn = () => {
     return <Redirect to='/account' />;
   }
 
-  const emailInputValid = () => {
-    return email === '' || isEmailValid(email);
-  };
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -129,7 +124,6 @@ export const SignIn = () => {
           variant='outlined'
           color='primary'
           className={classes.signInButton}
-          disabled={!emailInputValid}
           onClick={handleSignIn}
         >
           Sign in

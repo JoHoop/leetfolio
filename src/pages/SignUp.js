@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { signUp, changeUsername } from '../services/Auth.js';
 import { UserContext } from '../services/UserProvider.js';
 import { UseForm } from '../services/UseForm';
-import { isEmailValid } from '../services/Validators';
 import { Loading } from '../components/Loading';
 import { Notification } from '../components/Notification';
 import { Logo } from '../components/Logo';
@@ -73,10 +72,6 @@ export const SignUp = () => {
     return <Redirect to='/account' />;
   }
 
-  const emailInputValid = () => {
-    return email === '' || isEmailValid(email);
-  };
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -133,7 +128,6 @@ export const SignUp = () => {
           variant='outlined'
           color='primary'
           className={classes.submit}
-          disabled={!emailInputValid}
           onClick={handleSignUp}
         >
           Sign up

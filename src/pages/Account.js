@@ -32,7 +32,6 @@ import {
   verifyEmail,
 } from '../services/Auth.js';
 import { UseForm } from '../services/UseForm';
-import { isEmailValid } from '../services/Validators';
 import { Notification } from '../components/Notification';
 import { Illustration } from '../components/Illustration';
 import ShortBio from '../illustrations/shortBio.svg';
@@ -280,7 +279,7 @@ export const Account = () => {
         </Grid>
         <Grid item xs={12}>
           <Button
-            disabled={email === currentUser.email || !isEmailValid(email)}
+            disabled={email === currentUser.email}
             onClick={handleChangeEmail}
             fullWidth
             variant='outlined'
