@@ -73,11 +73,11 @@ export const AuthProvidersLinks = ({ mobile }) => {
           let identifier = null;
 
           if (providerData) {
-            const displayName = providerData.displayName;
             const emailAddress = providerData.email;
+            const displayName = providerData.displayName;
             const phoneNumber = providerData.phoneNumber;
 
-            identifier = displayName || emailAddress || phoneNumber;
+            identifier = emailAddress || displayName || phoneNumber;
           }
 
           return (

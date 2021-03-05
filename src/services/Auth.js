@@ -53,7 +53,9 @@ export const authProviderData = (providerId) => {
     return;
   }
 
-  return providerData.find((authProvider) => authProvider.id === providerId);
+  return providerData.find(
+    (authProvider) => authProvider.providerId === providerId
+  );
 };
 
 export const changeUsername = (username) => {
