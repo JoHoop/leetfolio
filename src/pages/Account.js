@@ -241,6 +241,12 @@ export const Account = () => {
         Sign out
       </Button>
       <Illustration illustration={ShortBio} />
+      <br />
+      <br />
+      <br />
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Username
+      </Typography>
       <Grid container spacing={0}>
         <Grid item xs={12}>
           <TextField
@@ -264,7 +270,12 @@ export const Account = () => {
           </Button>
         </Grid>
       </Grid>
+      <br />
+      <br />
 
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Email
+      </Typography>
       <Grid container spacing={0}>
         <Grid item xs={12}>
           <TextField
@@ -288,19 +299,12 @@ export const Account = () => {
           </Button>
         </Grid>
       </Grid>
+      <br />
+      <br />
 
-      <TextField
-        label='ID'
-        value={currentUser.uid}
-        variant='outlined'
-        disabled
-        fullWidth
-      />
-      <br />
-      <br />
-      <Divider />
-      <br />
-      <br />
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Password
+      </Typography>
       <TextField
         variant='outlined'
         fullWidth
@@ -332,9 +336,11 @@ export const Account = () => {
       </Button>
       <br />
       <br />
-      <Divider />
       <br />
-      <br />
+
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Avatar
+      </Typography>
       <div className={classes.wrapper}>
         <Avatar
           src={currentUser.photoURL}
@@ -373,15 +379,25 @@ export const Account = () => {
       </React.Fragment>
       <br />
       <br />
-      <Divider />
       <br />
-      <br />
+
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Links
+      </Typography>
       <AuthProvidersLinks mobile={isMobile} />
       <br />
       <br />
-      <Divider />
-      <br />
-      <br />
+
+      <Typography variant='h5' color='textSecondary' paragraph>
+        Account
+      </Typography>
+      <TextField
+        label='ID'
+        value={currentUser.uid}
+        variant='outlined'
+        disabled
+        fullWidth
+      />
       <Button
         onClick={handleClickOpen}
         fullWidth
