@@ -102,11 +102,10 @@ export const Account = () => {
   const [values, handleChange] = UseForm({
     username: currentUser.displayName,
     email: currentUser.email,
-    oldPassword: '',
     newPassword: '',
     confirmUsername: '',
   });
-  const { username, email, oldPassword, newPassword, confirmUsername } = values;
+  const { username, email, newPassword, confirmUsername } = values;
 
   const handleUploadPhoto = ({ target }) => {
     setUploading(true);
@@ -305,17 +304,6 @@ export const Account = () => {
       <TextField
         variant='outlined'
         fullWidth
-        name='oldPassword'
-        label='Old password'
-        type='password'
-        id='oldPassword'
-        autoComplete='current-password'
-        onChange={handleChange}
-      />
-
-      <TextField
-        variant='outlined'
-        fullWidth
         name='newPassword'
         label='New password'
         type='password'
@@ -325,7 +313,7 @@ export const Account = () => {
         onChange={handleChange}
       />
       <Button
-        disabled={newPassword === '' || oldPassword !== currentUser.password}
+        disabled={newPassword === ''}
         onClick={handleChangePassword}
         fullWidth
         variant='outlined'
