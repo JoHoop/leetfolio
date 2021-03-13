@@ -99,6 +99,7 @@ export const SignIn = () => {
               id='email'
               label='Email'
               name='email'
+              type='email'
               autoComplete='email'
               value={email}
               onChange={handleChange}

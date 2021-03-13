@@ -103,6 +103,7 @@ export const SignUp = () => {
               id='email'
               label='Email'
               name='email'
+              type='email'
               autoComplete='email'
               value={email}
               onChange={handleChange}
@@ -117,7 +118,7 @@ export const SignUp = () => {
               label='Password'
               type='password'
               id='password'
-              autoComplete='current-password'
+              autoComplete='new-password'
               value={password}
               onChange={handleChange}
             />

@@ -86,6 +86,7 @@ export const Reset = () => {
               id='email'
               label='Email'
               name='email'
+              type='email'
               autoComplete='email'
               value={emailInput}
               onChange={(event) => setEmailInput(event.target.value)}

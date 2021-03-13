@@ -4,7 +4,6 @@ import {
   Avatar,
   Button,
   Typography,
-  Divider,
   Dialog,
   DialogActions,
   DialogContent,
@@ -250,6 +249,7 @@ export const Account = () => {
             label='Username'
             value={username}
             name='username'
+            autoComplete='username'
             onChange={handleChange}
             variant='outlined'
             fullWidth
@@ -279,6 +279,8 @@ export const Account = () => {
             label='Email'
             value={email}
             name='email'
+            type='email'
+            autoComplete='email'
             onChange={handleChange}
             fullWidth
             variant='outlined'
@@ -309,7 +311,7 @@ export const Account = () => {
         label='New password'
         type='password'
         id='newPassword'
-        autoComplete='current-password'
+        autoComplete='new-password'
         value={newPassword}
         onChange={handleChange}
       />
@@ -420,6 +422,7 @@ export const Account = () => {
             fullWidth
             margin='dense'
             id='name'
+            autoComplete='username'
             label='Username'
             name='confirmUsername'
             value={confirmUsername}
