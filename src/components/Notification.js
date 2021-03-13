@@ -18,6 +18,7 @@ export const Notification = ({ notify, setNotify }) => {
       open={notify.isOpen}
       onClose={handleClose}
       autoHideDuration={8000}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >
       <Alert
         elevation={6}
