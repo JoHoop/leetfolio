@@ -6,10 +6,6 @@ export const ResumeContext = createContext();
 export const ResumeProvider = ({ children }) => {
   const [resume, setResume] = useState(resumeData);
 
-  const setDefault = () => {
-    setResume(resumeData);
-  };
-
   const setEmpty = () => {
     setResume({});
   };
@@ -19,7 +15,6 @@ export const ResumeProvider = ({ children }) => {
       value={{
         resume,
         setResume,
-        setDefault,
         setEmpty,
       }}
     >

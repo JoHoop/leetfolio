@@ -5,7 +5,7 @@ import { ResumeContext } from '../components/Resume/ResumeProvider';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
-import { Clear, GetApp, Publish, Replay, Save } from '@material-ui/icons';
+import { Clear, GetApp, Publish, Save } from '@material-ui/icons';
 import PageviewIcon from '@material-ui/icons/Pageview';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Editor = () => {
   const classes = useStyles();
-  const { resume, setResume, setDefault, setEmpty } = useContext(ResumeContext);
+  const { resume, setResume, setEmpty } = useContext(ResumeContext);
 
   const onChange = ({ formData }) => {
     setResume(formData);
@@ -51,7 +51,8 @@ export const Editor = () => {
         Editor
       </Typography>
       <Typography variant='h5' color='textSecondary' paragraph>
-        Update your resume.json file. Your data will never be saved on the server and is lost on reload.
+        Update your resume.json file. Your data will never be saved on the
+        server and is lost on reload.
       </Typography>
       <Box className={classes.buttons}>
         <input
@@ -83,9 +84,6 @@ export const Editor = () => {
           to={'/resume'}
         >
           Preview
-        </Button>
-        <Button variant='outlined' startIcon={<Replay />} onClick={setDefault}>
-          Default
         </Button>
         <Button variant='outlined' startIcon={<Clear />} onClick={setEmpty}>
           Reset
