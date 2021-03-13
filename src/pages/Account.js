@@ -33,8 +33,6 @@ import {
 } from '../services/Auth.js';
 import { UseForm } from '../services/UseForm';
 import { Notification } from '../components/Notification';
-import { Illustration } from '../components/Illustration';
-import ShortBio from '../illustrations/shortBio.svg';
 import { AuthProvidersLinks } from '../components/AuthProvidersLinks';
 
 const useStyles = makeStyles((theme) => ({
@@ -240,7 +238,6 @@ export const Account = () => {
       <Button onClick={handleSignOut} variant='outlined' color='primary'>
         Sign out
       </Button>
-      <Illustration illustration={ShortBio} />
       <br />
       <br />
       <br />
