@@ -71,7 +71,7 @@ export const Editor = () => {
           variant='outlined'
           startIcon={<GetApp />}
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(resume)
+            JSON.stringify(resume, null, 2)
           )}`}
           download='resume.json'
         >
