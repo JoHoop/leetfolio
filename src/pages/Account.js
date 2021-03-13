@@ -27,7 +27,6 @@ import {
   uploadPhoto,
   deletePhoto,
   deleteUser,
-  resetPassword,
   verifyEmail,
 } from '../services/Auth.js';
 import { UseForm } from '../services/UseForm';
