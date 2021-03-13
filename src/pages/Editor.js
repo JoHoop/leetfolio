@@ -51,7 +51,7 @@ export const Editor = () => {
         Editor
       </Typography>
       <Typography variant='h5' color='textSecondary' paragraph>
-        Update your resume.json file
+        Update your resume.json file. Your data will never be saved on the server and is lost on reload.
       </Typography>
       <Box className={classes.buttons}>
         <input
