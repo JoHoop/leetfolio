@@ -113,7 +113,7 @@ export const Resume = () => {
             Copyright {new Date().getFullYear()} &copy;
             {basics.name} |{' '}
             <a
-              href={'https://github.com/JoHoop/leetfolio'}
+              href={'https://github.com/LeetFolio'}
               target={'_blank'}
               rel={'noreferrer'}
             >
