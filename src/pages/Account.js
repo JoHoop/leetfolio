@@ -192,14 +192,6 @@ export const Account = () => {
     }
     handleClose();
   };
-  const handleResetPassword = async () => {
-    try {
-      await resetPassword(currentUser.email);
-      setSuccessMessage('Password reset link has been sent to your email!');
-    } catch (error) {
-      setErrorMessage(error);
-    }
-  };
   const handleVerifyEmail = async () => {
     try {
       await verifyEmail();
@@ -323,15 +315,6 @@ export const Account = () => {
         color='primary'
       >
         Set
-      </Button>
-
-      <Button
-        onClick={handleResetPassword}
-        fullWidth
-        variant='outlined'
-        color='primary'
-      >
-        Reset by email
       </Button>
       <br />
       <br />
