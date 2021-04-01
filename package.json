@@ -12,6 +12,7 @@
     "deepmerge": "^4.2.2",
     "firebase": "^8.2.9",
     "firebase-admin": "^9.5.0",
+    "html2pdf.js": "^0.9.2",
     "mdi-material-ui": "^6.22.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

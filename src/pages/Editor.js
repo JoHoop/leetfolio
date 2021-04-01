@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button, Box, Typography, makeStyles } from '@material-ui/core';
 import { ResumeContext } from '../components/Resume/ResumeProvider';
+import { Download } from '../services/Download';
 import Form from '@rjsf/material-ui';
 import metaSchemaDraft04 from 'ajv/lib/refs/json-schema-draft-04.json';
 import schema from '../data/schema.json';
 import { Clear, GetApp, Publish, Save } from '@material-ui/icons';
 import PageviewIcon from '@material-ui/icons/Pageview';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
 const useStyles = makeStyles((theme) => ({
   buttons: {
@@ -74,6 +76,13 @@ export const Editor = () => {
             JSON.stringify(resume, null, 2)
           )}`}
           download='resume.json'
+        >
+          Download
+        </Button>
+        <Button
+          variant='outlined'
+          startIcon={<PictureAsPdfIcon />}
+          onClick={Download}
         >
           Download
         </Button>
